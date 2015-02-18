@@ -1,0 +1,9 @@
+{exp:channel:categories channel="order" category_group="{cat_departments}" style="linear" disable="category_fields"}
+	<div>
+		<div class="departmentButton departmentInactive" onclick="javascript: orders.viewOrders(orders.view.status,{category_id});">{category_name}</div>
+	</div>
+{/exp:channel:categories}
+
+<div>
+	<div class="departmentButton departmentInactive" onclick="javascript: orders.viewOrders(orders.view.status,0);">All Departments</div>
+</div>

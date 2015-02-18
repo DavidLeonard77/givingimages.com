@@ -1,0 +1,145 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
+<head>
+	{embed="global/stage" title=""}
+
+	<!-- Fancy Stuff -->
+	<script src="{site_url}scripts/jquery.ez-pinned-footer.js" type="text/javascript" charset="utf-8"></script>
+	<script src="{path=lightbox/script}" type="text/javascript" charset="utf-8"></script>
+	
+</head>
+
+<!-- BODY -->
+<body>
+
+	{if logged_in}
+
+		{exp:profile:view}
+
+			<script type="text/javascript">
+
+				keychain.userId = '{pixfizz_user_id}';
+				keychain.checkPixfizzLogin(keychain.userId,'{segment_1}/{segment_2}/{segment_3}/{segment_4}/{segment_5}/{segment_6}/{segment_7}',function(){});
+				
+			</script>
+
+		{/exp:profile:view}
+
+	{if:else}
+
+		<iframe id="pixfizzLogout" src="{pixfizz_url}/site/logout_check" width="0" height="0" marginheight="0" marginwidth="0" frameborder="0" seemless></iframe>
+
+	{/if}
+
+	<div align="center">
+
+		<!-- LOGIN -->
+		{embed="global/login"}
+
+		<!-- HEADER -->
+		{embed="global/header"}
+
+		<div class="canvas">
+
+			{if segment_3 != ""}
+
+				{exp:channel:entries
+
+					channel = "custom_store"
+					dynamic = "no"
+					entry_id = "{segment_3}"
+					show_expired = "yes"
+					disable = "pagination|category_fields|member_data"
+
+				}
+
+					<!-- CONTENT -->
+					{embed="global/title" title="{title}"}
+
+					<div class="products">
+
+						<!-- SECTION NAV -->
+						<div class="container">
+
+							{embed="store/nav" path="default" title="Continue Shopping"}
+
+							{if current_time < expiration_date || expiration_date == "0"}
+
+								<div class="visibilityMedium filter">
+
+									<div class="totalResults">Total Results: <span id="totalResults"></span></div>
+
+									<script type="text/javascript">
+
+										drilldown.totalResults(drilldown.getResults('{entry_item_ids}'));
+
+									</script>
+
+								</div>
+
+							{/if}
+
+						</div>
+
+						<div class="container">
+
+							{if current_time < expiration_date || expiration_date == "0"}
+
+								{embed="custom/iscroll" items="{entry_item_ids}"}
+
+							{if:else}
+
+								{embed="custom/no_results"}
+
+							{/if}
+
+						</div>
+
+						{if no_results}
+
+							{embed="global/title" title="shop"}
+
+							<div class="container">
+
+								{embed="custom/no_results"}
+
+							</div>
+
+						{/if}
+					
+					</div>
+
+				{/exp:channel:entries}
+
+			{if:else}
+
+				<script type="text/javascript">
+
+					toolbox.docLoc('{site_url}');
+
+				</script>
+
+			{/if}
+
+		</div>
+
+		<!-- FOOTER -->
+		{embed="global/footer"}
+
+		<!-- LIGHTBOX -->
+		{embed="lightbox/index"}
+
+		<!-- MINI ZOOM -->
+		{embed="products/mini"}
+
+		<!-- VIDEO CONTENT -->
+		{embed="global/video_player"}
+
+	</div>
+
+</body>
+</html>

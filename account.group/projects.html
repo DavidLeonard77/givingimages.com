@@ -1,0 +1,165 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
+<head>
+	{embed="global/stage" title="&nbsp;my projects"}
+
+	<!-- PIXFIZZ -->
+	<script src="http://api.pixfizz.com/js_api/start-0.3.js" type="text/javascript" data-px-website="{pixfizz_editor_url}"></script>
+
+	<!-- Fancy Stuff -->
+	<script src="{site_url}scripts/jquery.ez-pinned-footer.js" type="text/javascript" charset="utf-8"></script>
+	<script src="{path=lightbox/script}" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<!-- BODY -->
+<body>
+
+	<div id="fb-root"></div>
+
+	{if logged_in}
+
+		{exp:profile:view}
+
+			<script type="text/javascript">
+
+				keychain.userId = '{pixfizz_user_id}';
+
+				projects.projectItems = projects.scrubString('{projects}');
+				projects.orderedItems = projects.scrubString('{ordered_projects}');
+
+				projects.projectItems = projects.addString(projects.projectItems,projects.orderedItems);
+				projects.projectItems = projects.scrubString(projects.projectItems);
+
+			</script>
+
+		{/exp:profile:view}
+
+		<!-- FLAG CART ITEMS -->
+		{exp:cartthrob:cart_items_info}
+
+			<script type="text/javascript">
+
+				cart.cartItems = projects.addItem('{item_options:purchased_order_id}',cart.cartItems);
+
+			</script>
+
+		{/exp:cartthrob:cart_items_info}
+
+		<div align="center">
+
+			<!-- SHARE -->
+			{embed="account/share"}
+
+			<!-- LOGIN -->
+			{embed="global/login"}
+
+			<!-- HEADER -->
+			{embed="global/header"}
+
+			<!-- CONTENT -->
+			<div class="canvas">
+
+				{embed="global/title" title="my projects"}
+
+
+				<div class="container">
+
+					{embed="account/nav" path="index" title="Continue Shopping"}
+
+				</div>
+
+				<div class="account">
+
+					<div class="container">
+
+						<!-- PROJECTS -->
+						<div class="projects">
+
+							<div class="account-title visibilityLarge">saved projects</div>
+
+							<div id="allBooksContent"></div>
+
+							<script type="text/javascript">
+
+								lightbox.favoriteItems = '{exp:remember_me:load list="favorites" reverse="yes"}';
+								lightbox.recentItems = '{exp:remember_me:get reverse="yes"}';
+								lightbox.boxLocation = 'account';
+
+								keychain.checkPixfizzLogin(keychain.userId,'{segment_1}/{segment_2}',function(){
+
+									projects.fetchBooks(projects.projectItems,'#allBooksContent');
+
+								});
+
+							</script>
+
+						</div>
+
+						<!-- LIGHTBOX -->
+						<div class="favorites visibilityLarge">
+
+							<!-- Favorites -->
+							<div>
+
+								<div id="pinnedFooter_favorites"></div>
+
+								<script type="text/javascript" language="javascript"> 
+
+									projects.loadLightbox(lightbox.favoriteItems,'favorites','favorite%20items');
+
+								</script>
+
+							</div>
+
+							<!-- Recents -->
+							<div>
+
+								<div id="pinnedFooter_recents"></div>
+
+								<script type="text/javascript" language="javascript">
+
+									projects.loadLightbox(lightbox.recentItems,'recents','recently%20viewed%20items');
+
+								</script>
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+			<!-- FOOTER -->
+			{embed="global/footer"}
+
+			<!-- VIDEO CONTENT -->
+			{embed="global/video_player"}
+
+		</div>
+
+	<!-- LOGIN -->
+	{if:else}
+
+		<iframe id="pixfizzLogout" src="{pixfizz_url}/site/logout_check" width="0" height="0" marginheight="0" marginwidth="0" frameborder="0" seemless></iframe>
+
+		{embed="global/login"
+
+			forced = "true"
+			abort = "{site_url}"
+			alert = "undefined"
+			return = "{segment_1}/{segment_2}"
+
+		}
+
+	{/if}
+	
+</body>
+</html>

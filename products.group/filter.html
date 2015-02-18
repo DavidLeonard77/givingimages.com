@@ -1,0 +1,27 @@
+<div class="visibilityMedium filter">
+
+	<div class="totalResults">Total Results: <span id="totalResults"></span></div>
+
+	{exp:channel:entries
+
+		channel = "{embed:channel}"
+		category = "{segment_2}&{segment_3}&{segment_4}&{segment_5}&{segment_6}"
+		dynamic = "off"
+		status = "{status_product}"
+		disable = "custom_fields|pagination|category_fields|member_data"
+
+	}
+
+		{if count == "1"}
+
+			<script type="text/javascript">
+
+				drilldown.totalResults('{total_results}');
+
+			</script>
+
+		{/if}
+
+	{/exp:channel:entries}
+
+</div>

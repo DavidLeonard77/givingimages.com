@@ -1,0 +1,18 @@
+<!-- DEPARTMENT -->
+{exp:channel:categories
+
+	dynamic = "no"
+	show = "{embed:category}"
+	category_group = "{cat_departments}"
+	disable = "pagination|member_data"
+	style="linear"
+
+}
+
+	<script type="text/javascript">
+
+		$('#departmentTitle_{embed:print_count}').html('{category_name}');
+
+	</script>
+
+{/exp:channel:categories}

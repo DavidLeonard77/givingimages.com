@@ -1,0 +1,457 @@
+@charset "UTF-8";
+/* CSS Document */
+
+/* ------------------------------- GLOBAL --------------------------------------------- */
+
+	html, body {
+		background-color: #fff;
+		font-weight: 400;
+		font-family: 'Roboto Condensed', sans-serif;
+		color: #636363;
+	}
+
+	button,
+	input,
+	select,
+	textarea {
+		font-family: 'Roboto Condensed', sans-serif;
+	}
+
+	.canvas {
+		background-color: #f9f9f9;
+	}
+
+	.smallButton {
+		font-family: 'Roboto Condensed', sans-serif;
+		background-color: transparent;
+		color: #636363;
+		font-weight: 700;
+		border-width: 2px;
+		border-color: #636363;
+		border-style: solid;
+	}
+	.smallButton:hover {
+		color: #ffffff;
+		background-color: #5cacde;
+		border-color: #5cacde;
+	}
+	.smallButtonDisabled {
+		color: #ffffff;
+		background-color: #dddddd;
+		border-color: #dddddd;
+	}
+
+	.majorButton {
+		font-family: 'Roboto Condensed', sans-serif;
+		background-color: #5cacde;
+		color: #fff;
+		font-weight: 300;
+		border-width: 0;
+	}
+	.majorButton:hover {
+		color: #5cacde;
+		background-color: #fff;
+		border-color: #5cacde;
+	}
+
+	.strong {
+		font-weight: 700;
+	}
+	.light {
+		color: #8c8c8c;
+	}
+
+	.optionItemBox {
+		background-color: #f0f0f0;
+	}
+
+	.detailThumbSpacer > div,
+	.related-bg-thumb,
+	.pinnedFooter-bg-thumb,
+	.productCreateButton,
+	.projects-shareSpacer div.projects-previewSpacer,
+	.cart-thumbSpacer > div:first-child {
+		box-shadow: 0 0 4px #ccc;
+	}
+
+	.oldBrowser-title,
+	.oldBrowserActive-title {
+		font-size: 14px;
+	}
+
+/* ------------------------------- MAIN MENU ------------------------------------------ */
+
+	#menuBoxSpacer {
+		background-color: #f9f9f9;
+	}
+
+	#menuDot01 {
+		background-color: #939185;
+	}
+	#menuDot02 {
+		background-color: #b5bf1e;
+	}
+	#menuDot03 {
+		background-color: #ccc24e;
+	}
+	#menuDot04 {
+		background-color: #8a6330;
+	}
+	#menuDot05 {
+		background-color: #5f63a2;
+	}
+	#menuDot06 {
+		background-color: #bec0cb;
+	}
+
+	.menuBoxContainer > div {
+		color: #636363;
+	}
+
+	.menuRolloverItemSpacer,
+	.menuRolloverItemSpacer a {
+		color: #fff;
+	}
+	.menuRolloverItemSpacer a:hover {
+		color: #5cacde;
+	}
+
+	.menuRolloverBackground { 
+		background-color: #666;
+	}
+
+/* ------------------------------- HEADER --------------------------------------------- */
+
+	.header-txt {
+		color: #999;
+		font-weight: 400;
+	}
+
+	.header-txt-link {
+		color: #636363;
+		font-weight: 600;
+	}
+
+	[class*="header-group-"]:hover .header-txt-link {
+		color: #5cacde;
+	}
+
+	.header-count > div {
+		background-color: #636363;
+		color: #fff;
+	}
+	[class*="header-group-"]:hover .header-count > div {
+		background-color: #5cacde;
+	}
+
+/* ------------------------------- TITLE ---------------------------------------------- */
+
+	.title {
+		font-weight: 700;
+		text-transform: lowercase;
+		color: #636363;
+	}
+
+	.navMenuTxt { color: #636363; }
+	.navMenuTxt a {
+		color: #636363;
+		text-decoration: none;
+	}
+	.navMenuTxt a:hover {
+		color: #5cacde;
+	}
+
+	.totalResults {
+		background-color: #f0f0f0;
+		color: #636363;
+	}
+
+/* ------------------------------- DRILLDOWN ------------------------------------------ */
+
+	.drillDownBox > div:first-child {
+		font-weight: 700;
+		background-color: #636363;
+		color: #ededed;
+		text-transform: uppercase;
+	}
+
+	.drillDownList {
+		color: #333;
+		background-color: #f0f0f0;
+	}  
+	.drillDownList:hover {
+		color: #5cacde;
+		background-color: #dfdfdf;
+	}
+
+	.drillDownListActive {
+		color: #5cacde;
+		background-color: #fff;
+	}
+
+/* ------------------------------- PRODUCTS ------------------------------------------- */
+
+	.thumb {
+		background-color: #fff;
+	}
+
+	.thumbTxt {
+		color: #8d8d8d;
+	}
+
+	.thumbTxt > div:first-child {
+		font-weight: 700;
+		color: #636363;
+	}
+
+/* ------------------------------- ACCOUNT -------------------------------------------- */
+
+	.account-title {
+		color: #aaaaaa;
+	}
+
+	.projects-none,
+	.favoriteThumbs {
+		background-color: #f0f0f0;
+	}
+
+	.projects-previewSpacer {
+		background-color: #fff;
+	}
+
+	.projects-shareSpacer > div:last-child {
+		color: #646464;
+	}
+
+/* ------------------------------- OVERLAY -------------------------------------------- */
+
+	.overlayDimmer {
+		background-color: #f9f9f9;
+	}
+
+	.pinnedFooterCloseSpacer > div,
+	.overlayClose > div {
+		font-weight: 400;
+		color: #333;
+	}
+	.pinnedFooterCloseSpacer > div:hover,
+	.overlayClose > div:hover {
+		color: #5cacde;
+	}
+
+	[class*="formSubmitTxt-"] > div,
+	[class*="formSubmitTxt-"] button {
+		color: #5cacde;
+		font-weight: 400;
+	}
+	[class*="formSubmitTxt-"] > div:hover,
+	[class*="formSubmitTxt-"] button:hover {
+		color: #636363;
+	}
+
+/* ------------------------------- LOGIN ---------------------------------------------- */
+
+	.loginTxt {	
+		font-weight: 300;
+		color: #636363;
+	}
+	.loginTxt a {
+		color: #5cacde;
+		font-weight: 400;
+	}
+	.loginTxt a:hover {
+		color: #636363;
+	}
+
+	#loginHeader {
+		font-weight: 400;
+	}
+
+	.loginTitleSpacer:first-line {
+		color: #636363;
+	}
+
+	.loginInputField {
+		color: #636363;
+		background-color: #fff;
+	}
+
+/* ------------------------------- LIGHTBOX ------------------------------------------- */
+
+	.pinnedFooter > div:first-child {
+		opacity: 0.9;
+		background-color: #f0f0f0;
+	}
+
+	.pinnedFooterHeader {
+		font-weight: 700;
+	}
+
+	.pinnedFooterTxt {
+		color: #636363;
+	}
+
+	.pinnedFooterTxtLink:hover {
+		color: #5cacde;
+	}
+
+	.pinnedFooterNone {
+		color: #aaaaaa;
+	}
+
+/* ------------------------------- HOMEPAGE ------------------------------------------- */
+
+	.slideDotSpacer > div {
+		background-color: #666;
+	}
+	.slideDotSpacer > div:hover {
+		background-color: #5cacde;
+	}
+
+	.block-button {
+		color: #636363;
+		background-color: #fff;
+		border-width: 2px;
+		border-style: solid;
+		border-color: #fff;
+	}
+	.block-button:hover {
+		color: #222;
+		border-color: #fff;
+	}
+
+	.block-info {
+		background-color: #fff;
+		color: #636363;
+	}
+
+/* ------------------------------- PRODUCT DETAIL PAGE -------------------------------- */
+
+	.detail-bg-preview {
+		background-color: #fff;
+	}
+
+	.detailTitle {
+		font-weight: 700;
+	}
+
+	.detailQuantityPricing {
+		background-color: #f0f0f0;
+	}
+
+	.productCreateButton {
+		color: #fff;
+		background-color: #636363;
+		font-weight: 400;
+		text-transform: lowercase;
+	}
+	.productCreateButton:hover {
+		color: #fff;
+		background-color: #5cacde;
+	}
+
+	.optionItemButton {
+		background-color: #f0f0f0;
+		color: #636363;
+	}
+	.optionItemButton:hover {
+		color: #fff;
+		background-color: #5cacde;
+	}
+	.optionItemButton a,
+	.optionItemButton a:hover {
+		color: #fff;
+		text-decoration: none;
+	}
+
+	.detailAttribute-title {
+		font-weight: 700;
+		color: #636363;
+	}
+
+	#suggested > div {
+		background-color: #f0f0f0;
+	}
+	#suggested div.cart-suggest {
+		background-color: transparent;
+	}
+
+/* ------------------------------- STORE ---------------------------------------------- */
+
+	.itemDivider {
+		border-style: dashed;
+		border-color: #ccc;
+	}
+
+	.cartTxt { color: #636363; }
+
+	.cartTxt a {
+		color: #636363;
+		text-decoration: none;
+	}
+	.cartTxt a:hover {
+		color: #5cacde;
+		text-decoration: underline;
+	}
+
+	.resultsTxt {
+		color: #636363;
+	}
+
+	.waitBox {
+		color: #5cacde;
+		font-weight: 300;
+	}
+
+	.cart-subtotal > span:last-child {
+		color: #fff;
+		background-color: #5cacde;
+	}
+
+/* ------------------------------- LANDING BODY --------------------------------------- */
+
+	.landingBody a {
+		color: #5cacde;
+		font-weight: 700;
+		text-decoration: none;
+	}
+	.landingBody a:hover {
+		text-decoration: underline;
+	}
+
+/* ------------------------------- FOOTER --------------------------------------------- */
+
+	.footerBox {
+		color: #636363;
+	}
+	.footerBox a {
+		font-weight: 700;
+		text-decoration: none;
+		color: #636363;
+	}
+	.footerBox a:hover { color: #5cacde; }
+
+	.footerLinkBox {
+		border-style: solid;
+		border-color: #f0f0f0;
+	}
+
+	.emailButton {
+		font-family: 'Roboto Condensed', sans-serif;
+		border-width: 2px;
+		padding-top: 0;
+		line-height: 0;
+		border-style: solid;
+		border-color: #636363;
+		color: #636363;
+		background-color: transparent;
+	}
+	.emailButton:hover {
+		color: #fff;
+		border-color: #5cacde;
+		background-color: #5cacde;
+	}
+
+	.siteMapItem a {
+		font-weight: 400;
+	}

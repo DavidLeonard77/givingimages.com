@@ -1,0 +1,47 @@
+<script type="text/javascript">
+
+	drilldown.group['group_{embed:group}'] = {
+
+		title: '{embed:title}',
+		item: {}
+
+	};
+
+</script>
+
+{exp:channel:categories
+
+	channel = "{embed:channel}"
+	category_group = "{embed:group}"
+	style = "linear"
+	disable = "category_fields"
+
+}
+
+	{exp:channel:entries
+
+		channel = "{embed:channel}"
+		category = "{embed:cat_left}{category_id}{embed:cat_right}"
+		dynamic = "off"
+		limit = "1"
+		disable = "custom_fields|pagination|category_fields|member_data"
+		status = "{status_product}"
+
+	}
+
+		<div class="product_drill_name" id="category_name_{category_id}">{category_name}</div>
+		<script type="text/javascript">
+
+			drilldown.group['group_{embed:group}'].item['{category_url_title}'] = {
+
+				title: $('#category_name_{category_id}').html(),
+				active: drilldown.checkActive('{embed:segment}','{category_id}'),
+				url: '{site_url}index.php/{segment_1}/{embed:url_left}{category_id}{embed:url_right}'
+
+			};
+
+		</script>
+
+	{/exp:channel:entries}
+
+{/exp:channel:categories}

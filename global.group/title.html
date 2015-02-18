@@ -1,0 +1,23 @@
+<div class="container titleSpacer">
+
+	<div class="title">{embed:title}</div>
+
+	{if segment_2 != "checkout"}
+		<div class="visibilityLarge video">
+			{exp:channel:entries channel="video_content" limit="2" dynamic="off" disable="category_fields|member_data"}
+				<div id="videoTicket_{entry_id}"
+					 class="videoTicket videoTicketClosed"
+					 onclick="javascript: video.show('{entry_id}')"
+					 onmouseover="javascript: toolbox.classReplacer('videoTicket_{entry_id}','videoTicket videoTicketOpen');"
+					 onmouseout="javascript: toolbox.classReplacer('videoTicket_{entry_id}','videoTicket videoTicketClosed');">
+					 	<img src="{video_ticket_img:default}" width="125" height="74">
+				</div>
+			{/exp:channel:entries}
+		</div>
+
+		<div class="visibilityMedium search">
+			{embed="search/index"}
+		</div>
+	{/if}
+
+</div>

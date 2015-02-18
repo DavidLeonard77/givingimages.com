@@ -1,0 +1,8 @@
+{if segment_4 == "favorites"}
+	{exp:remember_me:remove entry_id="{segment_3}" list="{segment_4}"}
+
+{if:elseif segment_4 == "recents"}
+	{exp:remember_me:clear entry_id="{segment_3}"}
+{/if}
+
+<script type="text/javascript" language="javascript"> lightbox.refreshLightbox('{segment_4}'); </script>

@@ -1,0 +1,295 @@
+{exp:channel:entries
+
+	channel = "order"
+	entry_id = "{segment_3}"
+	dynamic = "off"
+	status = "open|closed|{order_status_process}|{order_status_all}"
+	limit = "1"
+
+}
+
+	{if no_results}<div class="noOrdersSpacer strong">no orders were found</div>{/if}
+
+	<script type="text/javascript">
+
+		orders.order['{entry_id}'] = {
+
+			entry: '{entry_id}',
+			status: '{status}',
+			department: {},
+			pageCount: 1,
+			item: {},
+			totals: {
+
+				subtotal: toolbox.floatPrice('{order_subtotal}'),
+				shipping: toolbox.floatPrice('{order_shipping_cost}'),
+				tax: toolbox.floatPrice('{order_tax}'),
+				total: toolbox.floatPrice('{order_total}'),
+				coupon: '{order_coupon}',
+				payment: '{order_payment_status}'
+
+			}
+
+		};
+
+	</script>
+
+	{exp:cartthrob:order_items order_id="{entry_id}"}
+
+		<script type="text/javascript">
+
+			orders.order['{entry_id}'].item['{item:count}'] = {
+
+				entry: '{item:entry_id}',
+				id: '{item:purchased_order_id}',
+				department: '{item:purchased_department}',
+				attributes: '{item:purchased_attributes}',
+				subtotal: toolbox.floatPrice('{item:subtotal}'),
+				pdf: []
+
+			}
+
+		</script>
+
+	{/exp:cartthrob:order_items}
+
+	<!-- SAFECRACKER Production Notes -->
+	{exp:safecracker
+
+		name = "updateOrder"
+		channel = "order"
+		entry_id = "{entry_id}"
+
+	}
+
+		<div class="orderRow-detail">
+
+			<!-- Order Header -->
+			<div class="rowCell-detailHeader orderHeader-detail" align="left">
+
+				<div class="detailHeaderSpacer">
+
+					<div>
+
+						<span class="strong large">{entry_id}</span>
+
+					</div>
+
+					<div class="orderIcn-header">
+						<a href="{site_url}index.php/orders/print_order/{entry_id}" target="{entry_id}">
+							<img src="{site_url}graphics/graphics/order_print_w.png" width="23" height="20">
+						</a>
+					</div>
+
+				</div>
+
+				<div class="detailHeaderAddress">
+
+					<div>
+
+						{entry_date format="%M %d at %g:%i%a"}<br>
+						<br>
+						<span class="strong medium">{order_billing_last_name}, {order_billing_first_name}</span><br>
+						{order_customer_phone}<br>
+						<a href="mailto: {order_customer_email}">{order_customer_email}</a>
+
+					</div>
+
+				</div>
+
+				<div class="paymentStatus">
+					<div>
+						<span id="order_subtotal_1"></span><br>
+						<span id="order_shipping_cost_1"></span><br>
+						<span id="order_tax_1"></span><br>
+						<br>
+						<span id="order_total_1" class="strong"></span><br>
+						{if order_coupon}<span class="strong">{order_coupon}</span>{/if}<br>
+						{if order_payment_status == "Paid"}{order_last_four}{/if}<br>
+					</div>
+
+					<div>
+						Subtotal<br>
+						Shipping<br>
+						Tax<br>
+						<br>
+						<span class="strong">Order Total</span><br>
+						{if order_coupon}Coupon code{/if}<br>
+						{if order_payment_status == "Paid"}CC{/if}<br>
+					</div>
+				</div>
+
+				<div class="paymentUpdate">
+					<div class="paymentStatusItem">
+						<div><input id type="radio" value="Paid" name="order_payment_status"></div>
+						<div>Paid</div>
+					</div>
+
+					<div class="paymentStatusItem">
+						<div><input type="radio" value="Pending" name="order_payment_status"></div>
+						<div>Pending</div>
+					</div>
+
+					<div class="paymentStatusItem">
+						<div><input type="radio" value="Not Paid" name="order_payment_status"></div>
+						<div>Not Paid</div>
+					</div>
+				</div>
+
+				<script type="text/javascript">
+
+					// Active payment status
+					$('input[name="order_payment_status"]').each(function(){
+
+						if ($(this).attr('value') == orders.order['{entry_id}'].totals.payment) $(this).attr('checked',true);
+
+					});
+
+				</script>
+
+				<div class="paymentStatus">
+					<div id="order_payment_status_1"></div>
+				</div>
+
+			</div>
+
+			<!-- Order Body -->
+			<div class="rowCell-detailBody" align="left">
+
+				{if order_pickup_location == "Deliver to my shipping address"}
+					<div class="large">Ship</div>
+					<div>
+						{order_shipping_first_name} {order_shipping_last_name}<br>
+						{order_shipping_address}<br>
+						{if order_shipping_address_2}{order_shipping_address_2}<br>{/if}
+						{order_shipping_city}<br>
+						{order_shipping_state}, {order_shipping_zip}
+					</div>
+				{if:else}
+					<div class="large">Pickup</div>
+
+					{!--<!-- <div>{order_pickup_location}<br></div> -->--}
+
+				{/if}
+
+				{if order_notes}
+					<div>
+						<span class="strong">Customer Notes</span><br>
+						{order_notes}
+					</div>
+				{/if}
+
+				{if order_pickup_location == "Deliver to my shipping address"}
+					<div class="detailPickupLocation">
+						<div>
+							<div><span class="strong">Ship Via</span></div>
+							<input type="text" id="order_shipping_company" name="order_shipping_company" value="{order_shipping_company}">
+						</div>
+						<div>
+							<div><span class="strong">Tracking Number</span></div>
+							<input type="text" id="order_tracking_number" name="order_tracking_number" value="{order_tracking_number}">
+						</div>
+					</div>
+				{/if}
+
+				<div class="detailNotes">
+
+					<div>
+						<div><span class="strong">Order Notes</span> (to customer)</div>
+						<textarea id="order_customer_notes" name="order_customer_notes" rows="2">{order_customer_notes}</textarea>
+					</div>
+
+					<div>
+						<div><span class="strong">Production Notes</span> (internal)</div>
+						<textarea id="order_production_notes" name="order_production_notes" rows="2">{order_production_notes}</textarea>
+					</div>
+
+				</div>
+
+			</div>
+
+			<!-- Order Footer -->
+			<div class="rowCell-detailFooter" align="right">
+
+				<div align="right">
+
+					<div class="statusBox {if status == 'New Order'}bgcolor-green
+							   {if:elseif status == 'In Production'}bgcolor-navy
+							{if:elseif status == 'Ready for Pickup'}bgcolor-teal
+								  {if:elseif status == 'In Transit'}bgcolor-turquoise
+									 {if:elseif status == 'Shipped'}bgcolor-darkNavy
+														   {if:else}bgcolor-darkGrey{/if}"
+						 align="center">{status}
+
+					</div>
+
+				</div>
+
+				<div class="detailStatus">
+
+					<div>
+						<select name="status"></select>
+					</div>
+
+				</div>
+
+				<div align="right">
+
+					<div class="departmentsSpacer">
+
+						<div align="right">
+
+							<!-- List all Departments -->
+							{exp:channel:categories
+
+								channel = "order"
+								category_group = "{cat_departments}"
+								style = "linear"
+								disable = "category_fields"
+
+							}
+
+								<div class="departmentsItem">
+									<div>{category_name}</div>
+									<div>
+										<input type="checkbox" name="category[]" id="{entry_id}_{category_id}" value="{category_id}">
+									</div>
+								</div>
+
+							{/exp:channel:categories}
+
+							{categories}
+
+								<script type="text/javascript">
+
+									// Active department
+									$('#{entry_id}_{category_id}').attr('checked',true);
+									orders.order['{entry_id}'].department['{category_id}'] = { department: '{category_id}' };
+
+								</script>
+
+							{/categories}
+
+						</div>
+
+						<div align="right">
+							<button id="submitUpdateOrder" class="smallButton">UPDATE</button>
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	{/exp:safecracker}
+
+	<script type="text/javascript">
+
+		orders.checkItemLoad('{segment_3}','{segment_4}');
+
+	</script>
+
+{/exp:channel:entries}

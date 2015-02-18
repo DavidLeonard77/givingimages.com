@@ -1,0 +1,10 @@
+{if embed:cat_1 != ""}
+	{embed="global/nav" category="{embed:cat_1}" path="{embed:path_1}"}
+
+{if:else}
+	{embed="store/nav" path="default" title="Continue Shopping"}
+{/if}
+
+{if embed:cat_2 != ""}
+	{embed="global/nav" category="{embed:cat_2}" path="{embed:path_2}" txt="Browse&nbsp;"}
+{/if}

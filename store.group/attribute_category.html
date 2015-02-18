@@ -1,0 +1,26 @@
+{exp:channel:entries
+
+	entry_id = "{embed:entry_id}"
+	dynamic = "no"
+	disable = "pagination|member_data"
+	status = "{status_product}"
+
+}
+
+	<div id="attributes_container_{embed:row_id}"></div>
+
+	<!-- PRODUCT ATTRIBUTES -->
+	{categories}
+
+		{embed="store/attribute"
+
+			row_id = "{embed:row_id}"
+			quantity = "{embed:quantity}"
+			purchased_attributes = "{embed:purchased_attributes}"
+			category = "{category_id}"
+
+		}
+
+	{/categories}
+
+{/exp:channel:entries}

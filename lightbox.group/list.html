@@ -1,0 +1,52 @@
+<div class="visibilityLarge">
+	<div class="pinnedFooterHeaderLinks">
+
+		{if segment_3 == "favorites"}
+			<div class="pinnedFooterTxt pinnedFooterTxtLink"
+				 onclick="javascript: lightbox.clearItems('{segment_3}');">
+				clear all items
+			</div>
+
+		{if:else}
+			<div class="pinnedFooterTxt pinnedFooterTxtLink"
+				 onclick="javascript: lightbox.clearItems('recents');">
+				clear all recently viewed
+			</div>
+
+			<div class="pinnedFooterTxt pinnedFooterTxtLink"
+				 onclick="javascript: lightbox.addAll('favorites');">
+				save all to favorites
+			</div>
+		{/if}
+
+	</div>
+</div>
+
+<script type="text/javascript" language="javascript">
+
+	lightbox.categoryId = 0;
+	lightbox.category = '';
+	lightbox.totalResults = 0;
+
+</script>
+
+{if segment_5 != ""}
+
+	{embed="lightbox/list_items"
+
+		list = "{segment_5}"
+		limit = "10"
+
+	}
+
+{if:else}
+
+	<div class="pinnedFooterNone pinnedFooterTxt">you have no {segment_4}</div>
+
+{/if}
+
+<script type="text/javascript" language="javascript">
+
+	lightbox.setLightboxCount('count_{segment_3}','&nbsp;(' + lightbox.totalResults + ')');
+
+</script>

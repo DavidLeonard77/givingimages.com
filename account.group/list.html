@@ -1,0 +1,49 @@
+<div class="account-title">{segment_4}</div>
+
+<script type="text/javascript" language="javascript">
+
+	lightbox.categoryId = 0;
+	lightbox.category = '';
+
+</script>
+
+{if segment_5 != ""}
+
+	<div class="favoriteThumbs">
+
+		{embed="lightbox/list_items"
+
+			list = "{segment_5}"
+			limit = "30"
+
+		}
+
+	</div>
+
+	<div class="favoriteLinks">
+
+		{if segment_3 == "favorites"}
+			<div class="pinnedFooterTxt pinnedFooterTxtLink"
+				 onclick="javascript: lightbox.clearItems('{segment_3}');">
+				clear all items
+			</div>
+
+		{if:else}
+			<div class="pinnedFooterTxt pinnedFooterTxtLink"
+				 onclick="javascript: lightbox.clearItems('recents');">
+				clear all recently viewed
+			</div>
+
+			<div class="pinnedFooterTxt pinnedFooterTxtLink"
+				 onclick="javascript: lightbox.addAll('favorites');">
+				save all to favorites
+			</div>
+		{/if}
+
+	</div>
+
+{if:else}
+
+	<div class="favoriteThumbs projects-none">you have no {segment_4}</div>
+	
+{/if}

@@ -1,0 +1,29 @@
+<div id="overlayDimmer" class="overlayDimmer overlayAni transparent inactive" onclick="javascript: keychain.hideLogin();"></div>
+
+<div id="loginSubmit" class="overlayContainer-login overlayAni transparent inactive">
+
+	<div>
+
+		<div id="loginSubmitContent"></div>
+
+		<!-- Forces a login screen -->
+		{if embed:forced == "true"}
+
+			<script type="text/javascript">
+
+				keychain.showLogin({
+
+					return_url: '{embed:return}',
+					abort_url: '{embed:abort}',
+					forced: 'true',
+					forced_alert: '{embed:alert}'
+
+				});
+
+			</script>
+
+		{/if}
+
+	</div>
+
+</div>

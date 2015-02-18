@@ -1,0 +1,314 @@
+	<div id="fb-root"></div>
+
+	<script type="text/javascript">
+
+		window.fbAsyncInit = function() {
+			// init the FB JS SDK
+			FB.init({
+			appId: '209766572522982',                          // App ID from the app dashboard
+			status     : true,                                 // Check Facebook Login status
+			xfbml      : true                                  // Look for social plugins on the page
+			});
+
+			// Additional initialization code such as adding Event Listeners goes here
+		};
+
+		// Load the SDK asynchronously
+		(function(d, s, id){
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) {return;}
+			js = d.createElement(s); js.id = id;
+			js.src = "//connect.facebook.net/en_US/all.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+
+	</script>
+
+	<script type="text/javascript">
+
+		(function(d){
+			var f = d.getElementsByTagName('SCRIPT')[0], p = d.createElement('SCRIPT');
+			p.type = 'text/javascript';
+			p.async = true;
+			p.src = '//assets.pinterest.com/js/pinit.js';
+			f.parentNode.insertBefore(p, f);
+		}(document));
+
+	</script>
+
+	{exp:channel:entries
+
+		entry_id = "{segment_8}"
+		dynamic = "off"
+		limit = "1"
+		status = "{status_product}"
+		disable = "pagination|member_data"
+
+	}
+
+		<script type="text/javascript">
+
+			cart.row['{entry_id}'] = {
+
+				entry_id: '{entry_id}',
+				pricing_status: '',
+				price: toolbox.floatPrice('{product_price}'),
+				price_override: '',
+				pricing_model: {},
+				quantity_min: 1,
+				quantity_set: 1,
+				field: {}
+
+			}
+
+		</script>
+
+		<div class="detail container">
+
+			<!-- PRODUCT -->
+			<div class="detail-thumb">
+
+				<!-- SHARING -->
+				<div class="socialLinks visibilityLarge">
+					<div><a data-pin-config="bellow" target="top" href="//pinterest.com/pin/create/button/?url=http%3A%2F%2F{site_domain}%2Findex.php%2Fdetail%2F{segment_2}%2F{segment_3}%2F{segment_4}%2F{segment_5}%2F{segment_6}%2F{segment_7}%2F{segment_8}&media=http%3A%2F%2F{site_domain}%2Fgraphics%2Fproducts%2F_detail%2F{preview_image_1:detail}{file_name}{/preview_image_1}&description=Pin-It" data-pin-do="buttonPin" ><img src="//assets.pinterest.com/images/pidgets/pin_it_button.png"></a></div>
+					<div><div class="fb-like" data-href="{site_url}index.php/detail/{segment_2}/{segment_3}/{segment_4}/{segment_5}/{segment_6}/{segment_7}/{segment_8}" data-send="true" data-layout="button_count" data-width="450" data-show-faces="false" data-font="trebuchet ms"></div></div>
+				</div>
+
+				<!-- MAIN PREVIEW IMAGE -->
+				<div class="detail-bg-preview"
+					 id="productPreviewMain"
+					 style="background-image: url({preview_image_1:detail}); background-repeat: no-repeat; cursor: pointer;"
+					 onclick="javascript: zoom.show('{segment_2}/{segment_3}/{segment_4}/{segment_5}/{segment_6}/{segment_7}/{entry_id}');"></div>
+
+				<!--  PREVIEW THUMBS  -->
+
+				<div class="detailIconSpacer">
+
+					<div class="visibilityLarge thumb-bg-icon-zoom" onclick="javascript: zoom.show('{segment_2}/{segment_3}/{segment_4}/{segment_5}/{segment_6}/{segment_7}/{entry_id}');"></div>
+
+					<div class="visibilityLarge thumb-bg-icon-favorite"
+
+						{if logged_in} onclick="javascript: lightbox.addItems('{entry_id}','favorites');"
+						{if:else} onclick="javascript: keychain.showLogin({
+
+							return_url: '{segment_1}/{segment_2}/{segment_3}/{segment_4}/{segment_5}/{segment_6}/{segment_7}/{segment_8}'
+
+						});"{/if}></div>
+
+				</div>
+
+				<!-- THUMBS -->
+				<div class="detailThumbSpacer">
+
+					{if preview_image_2 != '' OR preview_image_3 != '' OR preview_image_4 != ''}
+												  <div style="background-image: url('{preview_image_1:thumb}');" onclick="javascript: toolbox.backgroundSwap('productPreviewMain','url({preview_image_1:detail})')"></div>
+						{if preview_image_2 != ''}<div style="background-image: url('{preview_image_2:thumb}');" onclick="javascript: toolbox.backgroundSwap('productPreviewMain','url({preview_image_2:detail})')"></div>{/if}
+						{if preview_image_3 != ''}<div style="background-image: url('{preview_image_3:thumb}');" onclick="javascript: toolbox.backgroundSwap('productPreviewMain','url({preview_image_3:detail})')"></div>{/if}
+						{if preview_image_4 != ''}<div style="background-image: url('{preview_image_4:thumb}');" onclick="javascript: toolbox.backgroundSwap('productPreviewMain','url({preview_image_4:detail})')"></div>{/if}
+					{/if}
+
+				</div>
+
+			</div>
+
+			<!--  INFO  -->
+			<div class="detail-info">
+
+				<div class="optionItemBox">
+
+						<!-- PRODUCT TITLE -->
+						<div class="detailTitle">
+							{if segment_2 == "classes" || segment_2 == "misc"}{title}<br>
+							{if:else}
+								{categories limit="1" show_group="{embed:cat_2}" show="not {embed:cat_2_all}"}
+
+									{category_name}&nbsp;
+
+									<script type="text/javascript">
+
+										// Save item data for Pixfizz book data
+										projects.thisType = '{category_name}';
+
+									</script>
+
+								{/categories}
+
+								{categories limit="1" show_group="{embed:cat_3}" show="not {embed:cat_3_all}"}
+
+									{category_name}
+
+									<script type="text/javascript">
+
+										// Save item data for Pixfizz book data
+										projects.thisType += ' {category_name}';
+
+									</script>
+
+								{/categories}<br>
+							{/if}
+						</div>
+
+						<!-- STATUS FLAGS -->
+						<div class="detailFlagSpacer">
+
+							<div>
+								{if status == "New"}
+									<div class="thumb-bg-flag-new"></div>
+								{if:elseif status == "Designer"}
+									<div class="thumb-bg-flag-designer"></div>
+								{if:elseif status == "Favorite"}
+									<div class="thumb-bg-flag-favorite"></div>
+								{if:elseif status == "Sale"}
+									<div class="thumb-bg-flag-sale"></div>
+								{/if}
+							</div>
+
+							<div id="product_flag_{entry_id}"></div>
+
+						</div>
+
+						<!-- QUANTITY -->
+						<input id="product_quantity_{entry_id}" type="hidden" value="1">
+
+						<!-- PRICE -->
+						<div class="detailPrice" id="product_price_{entry_id}"></div>
+
+						<!-- ITEM NUMBER -->
+						<div class="detailCode">Item<span> #{title}</span></div>
+
+				</div>
+
+				<!-- PRODUCT DESCRIPTIONS -->
+				<div class="detailDescription">
+					{categories show_group="{embed:cat_3}"}{category_description}{/categories}
+					{categories show_group="{embed:cat_2}"}{category_description}{/categories}
+					{categories show_group="{embed:cat_1}"}{category_description}{/categories}
+					{if product_long_desc != ""}{product_long_desc}{/if}
+				</div>
+
+				<div id="pricing"></div>
+
+				<!-- PRICING DESCRIPTION -->
+				{categories}
+
+					{embed="detail/pricing"
+
+						category = "{category_id}"
+						entry_id = "{entry_id}"
+
+					}
+
+				{/categories}
+
+				<script type="text/javascript">
+
+					cart.updatePriceDetails('{entry_id}');
+
+				</script>
+
+				<!-- Skip Editor and add to cart -->
+				{if segment_2 == "classes" || segment_2 == "misc"}
+
+					{if segment_2 == "classes"}
+
+						{exp:cartthrob:add_to_cart_form
+
+							name = "directToCart"
+							id = "directToCart"
+							entry_id = "{entry_id}"
+							tax_exempt = "yes"
+							shipping_exempt = "yes"
+
+							item_options:purchased_order_id = "CLASS"
+							return = "store"
+
+						}{/exp:cartthrob:add_to_cart_form}
+
+					{if:elseif segment_2 == "misc"}
+
+						{exp:cartthrob:add_to_cart_form
+
+							name = "directToCart"
+							id = "directToCart"
+							entry_id = "{entry_id}"
+
+							item_options:purchased_order_id = "MISC"
+							return = "store"
+
+						}{/exp:cartthrob:add_to_cart_form}
+
+					{/if}
+
+					<div class="productCreateButton" onclick="javascript: $('#directToCart').submit();">Add to Cart</div>
+
+				<!-- PIXFIZZ EDITOR LINK -->
+				{if:else}
+
+					<script type="text/javascript">
+
+						// Save item data for Pixfizz book data
+						projects.booksData['{entry_id}'] = {
+
+							entry_id: '{entry_id}',
+							theme_id: '{theme_id}',
+							product_id: '{related_entries id="product_id"}{title}{/related_entries}',
+							product_code: '{title}',
+							product_type: projects.thisType,
+							return_url: '{segment_1}/{segment_2}/{segment_3}/{segment_4}/{segment_5}/{segment_6}/{segment_7}/{segment_8}/{segment_9}'
+
+						};
+
+					</script>
+
+					<div class="productCreateButton" onclick="javascript: projects.newProject('{entry_id}');">Create Yours Now</div>
+
+				{/if}
+
+			</div>
+
+			<!-- PRODUCT ATTRIBUTES -->
+			<div id="attributes"></div>
+
+			{categories}
+
+				{embed="detail/attribute"
+
+					category = "{category_id}"
+					entry_id = "{entry_id}"
+
+				}
+
+			{/categories}
+
+			<script type="text/javascript">
+
+				cart.previewOptions('{entry_id}');
+
+			</script>
+
+		</div>
+
+		<div id="suggested"></div>
+
+		<!-- SUGGESTED PRODUCTS -->
+		{categories}
+
+			{embed="detail/related_category"
+
+				category = "{category_id}"
+
+			}
+
+		{/categories}
+
+		<script type="text/javascript">
+
+			suggest.suggestThese('{segment_8}','{site_url}index.php/detail/related/');
+
+		</script>
+
+	{/exp:channel:entries}
+
+	<!-- Add to recently viewed Lightbox -->
+	{exp:remember_me:clear entry_id="{segment_8}"}
+	{exp:remember_me:set entry_id="{segment_8}"}

@@ -1,0 +1,27 @@
+{embed="store/email_header"}
+
+{exp:channel:entries channel="order" entry_id="{entry_id}" status="{order_status_all}"}
+
+	Dear {order_billing_first_name},<br>
+	<br>
+	Your order ( <span style="font-weight: 700;">#{entry_id}</span> ) is ready for pickup at our store on {order_pickup_location}. Please disregard this email if you have already picked up your order.<br>
+
+	{if order_payment_status == "Not Paid"}
+		<br>
+		Total due at pickup: <?php
+
+			$subtotal = str_replace('$','','{order_total}');
+			echo '$' . round($subtotal, 2, PHP_ROUND_HALF_UP);
+
+		?><br>
+	{/if}
+
+	<br>
+	Please contact us at <a href="mailto: {email_default}" style="font-weight: 700;">{email_default}</a> if you have any questions.<br>
+	<br>
+	Thank you,<br>
+	{site_name}<br>
+
+{/exp:channel:entries}
+
+{embed="store/email_footer"}

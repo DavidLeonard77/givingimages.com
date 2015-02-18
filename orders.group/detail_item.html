@@ -1,0 +1,78 @@
+{exp:channel:entries
+
+	channel = "order"
+	entry_id = "{segment_3}"
+	dynamic = "off"
+	status = "open|closed|{order_status_process}|{order_status_all}"
+	limit = "1"
+
+}
+
+	<!-- ORDER ITEMS -->
+	{exp:cartthrob:order_items order_id="{entry_id}"}
+
+		<div id="itemRow_{item:count}" class="itemRow">
+
+			<!-- Item Header -->
+			<div class="rowCell-itemHeader" align="left">
+
+				<div>
+
+					<div>
+
+						<span class="medium">{item:title}</span>
+
+						<div>
+							Quantity&nbsp;&nbsp;<span class="strong medium">{item:quantity}</span><br>
+							<br>
+							Subtotal&nbsp;&nbsp;<span id="subtotal_1_{item:count}" class="strong"></span>
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+			<!-- Item Body -->
+			<div class="rowCell-itemBody" align="left">
+
+				<span class="medium">Product Details</span>
+
+				<div>
+
+					<span id="purchased_attributes_1_{item:count}" class="strong"></span>
+
+				</div>
+
+			</div>
+
+			<!-- Item Footer -->
+			<div class="rowCell-itemFooter" align="right">
+
+				<span id="fileLink_{item:purchased_order_id}"></span>
+
+			</div>
+
+		</div>
+
+	{/exp:cartthrob:order_items}
+
+	<script type="text/javascript">
+
+		// Sync Ajax get PDFs
+		orders.getPDFs('{entry_id}',function(orderId){
+
+			// Output to DOM
+			orders.createPricing(orderId);
+			orders.createAttributes(orderId);
+			orders.createOrderItems(orderId);
+			orders.checkDetailRows(orderId,'{segment_4}');
+			orders.createStatusSelect('{status}');
+			$('#submitUpdateOrder').click(function(){ orders.updateOrder('{entry_id}','{segment_4}'); });
+
+		});
+
+	</script>
+
+{/exp:channel:entries}

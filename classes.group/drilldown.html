@@ -1,0 +1,71 @@
+<div class="drillDownSpacer visibilityLarge">
+
+	<div id="drillDownContainer">
+		<div id="drillDownDock">
+			<div id="drillDown"></div>
+			<div class="optionItemButton navMenuTxt" onclick="javascsript: toolbox.docLoc('/index.php/{segment_1}/{segment_2}/{cat_class_category_all}/{cat_class_level_all}/{cat_class_equipment_all}/{cat_class_size_all}');">Clear All Filters</div>
+		</div>
+	</div>
+	<div id="drillDownFloatContainer" class="opaque active">
+		<div id="drillDownFloat"></div>
+	</div>
+
+	<div id="remove">
+
+		<!-- Class Category -->
+		{embed="products/drill"
+
+			segment = "{segment_3}"
+			title = "Class Type"
+			group = "{cat_class_category}"
+			channel = "{embed:channel}"
+			cat_left = "{segment_2}&"  cat_right = "&{segment_4}&{segment_5}&{segment_6}"
+			url_left = "{segment_2}/"  url_right = "/{segment_4}/{segment_5}/{segment_6}"
+
+		}
+
+		<!-- Class Equipment -->
+		{embed="products/drill"
+
+			segment = "{segment_5}"
+			title = "Equipment Covered"
+			group = "{cat_class_equipment}"
+			channel = "{embed:channel}"
+			cat_left = "{segment_2}&{segment_3}&{segment_4}&"  cat_right = "&{segment_6}"
+			url_left = "{segment_2}/{segment_3}/{segment_4}/"  url_right = "/{segment_6}"
+
+		}
+
+		<!-- Class Level -->
+		{embed="products/drill"
+
+			segment = "{segment_4}"
+			title = "Class Level"
+			group = "{cat_class_level}"
+			channel = "{embed:channel}"
+			cat_left = "{segment_2}&{segment_3}&"  cat_right = "&{segment_5}&{segment_6}"
+			url_left = "{segment_2}/{segment_3}/"  url_right = "/{segment_5}/{segment_6}"
+
+		}
+
+		<!-- Class Size -->
+		{embed="products/drill"
+
+			segment = "{segment_6}"
+			title = "Class Size"
+			group = "{cat_class_size}"
+			channel = "{embed:channel}"
+			cat_left = "{segment_2}&{segment_3}&{segment_4}&{segment_5}&"  cat_right = ""
+			url_left = "{segment_2}/{segment_3}/{segment_4}/{segment_5}/"  url_right = ""
+
+		}
+
+	</div>
+
+</div>
+
+<script type="text/javascript">
+
+	drilldown.createFilter();
+
+</script>

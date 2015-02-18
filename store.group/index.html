@@ -1,0 +1,288 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
+<head>
+	{embed="global/stage" title="&nbsp;cart items"}
+
+	<!-- PIXFIZZ -->
+	<script src="http://api.pixfizz.com/js_api/start-0.3.js" type="text/javascript" data-px-website="{pixfizz_editor_url}"></script>
+
+</head>
+
+<!-- BODY -->
+<body>
+
+	{if logged_in}
+
+		{exp:profile:view}
+
+			<script type="text/javascript">
+
+				keychain.userId = '{pixfizz_user_id}';
+
+				projects.projectItems = projects.scrubString('{projects}');
+				projects.orderedItems = projects.scrubString('{ordered_projects}');
+				keychain.userCoupons = '{coupons}';
+
+			</script>
+
+		{/exp:profile:view}
+
+		<div align="center">
+
+			<!-- RELATED PRODUCTS -->
+			{embed="store/suggest"}
+
+			<!-- HEADER -->
+			{embed="global/header"}
+
+			<div class="canvas">
+
+				{embed="global/title" title="Cart Items"}
+
+				{if "{exp:cartthrob:total_items_count}" > 0}
+
+					<div class="container">
+						{embed="store/nav" path="default" title="Continue Shopping"}
+					</div>
+
+					<!-- SHOW ITEMS -->	
+					{exp:cartthrob:update_cart_form
+
+						id = "update_cart_form"
+						return = "store/{segment_2}"
+						onsubmit = "cart.javascript_price_validation()"
+
+					}
+
+						{exp:cartthrob:cart_items_info}
+
+							<!-- CART ITEM ROW -->
+							<div class="container cartSpacer">
+
+									<!-- CART ITEM IMAGE -->
+									<div align="center">
+
+										<div class="cart-thumbSpacer">
+											<div id="previewImage_{row_id}" class="thumb"></div>
+											<div id="previewEdit_{row_id}"></div>
+										</div>
+
+									</div>
+
+									<!-- TITLE -->
+									<div align="left" class="cart-thumbTitle">
+
+										<div id="previewName_{row_id}"></div>
+
+										<!-- STATUS FLAGS -->
+										<div>
+											{if status == "New"}
+												<div class="thumb-bg-flag-new"></div>
+											{if:elseif status == "Designer"}
+												<div class="thumb-bg-flag-designer"></div>
+											{if:elseif status == "Favorite"}
+												<div class="thumb-bg-flag-favorite"></div>
+											{if:elseif status == "Sale"}
+												<div class="thumb-bg-flag-sale"></div>
+											{/if}
+										</div>
+
+										<div id="product_flag_{row_id}"></div>
+
+									</div>
+
+									<!-- CUSTOM IMPRINTING -->
+									<div class="custom_imprint" id="custom_imprint_{row_id}">{item_options:purchased_custom_imprinting}</div>
+
+									<!-- GET THE DATA -->
+									<script type="text/javascript">
+
+										cart.row['{row_id}'] = {
+
+											entry_id: '{entry_id}',
+											pricing_status: '',
+											price: toolbox.floatPrice('{product_price}'),
+											price_override: '',
+											subtotals: {},
+											pricing_model: {},
+											quantity: parseInt('{quantity}'),
+											quantity_min: 1,
+											quantity_set: 1,
+											custom_imprint: $('#custom_imprint_{row_id}').html(),
+											required: '',
+											coupon: '',
+											book_id: '{item_options:purchased_order_id}',
+											theme_id: '{theme_id}',
+											product_code: '{title}',
+											ee_preview_url: '{preview_image_1:small}',
+											return_url: '{segment_1}',
+											field: {}
+
+										}
+
+									</script>
+
+									<!-- OPTIONS -->
+									<div class="cart-optionsSpacer" align="right">
+
+										<!-- QUANTITY -->
+										<div>Quantity</div>
+
+										<div class="cart-quantity">
+											<input type="text" id="product_quantity_{row_id}" maxlength="5" name="quantity[{row_id}]" size="5" value="{quantity}">
+											<div class="smallButton" onclick="javascript: cart.addQuantity('{row_id}'); cart.updateCartPrice();">+</div>
+											<div class="smallButton" onclick="javascript: cart.subtractQuantity('{row_id}'); cart.updateCartPrice();">-</div>
+										</div>
+
+										<div id="quantityMinNote_{row_id}"></div>
+										<div id="quantitySetNote_{row_id}"></div>
+
+										<!-- PRICING -->
+										{categories}
+
+											{embed="store/pricing"
+
+												entry_id = "{entry_id}"
+												category = "{category_id}"
+												row_id = "{row_id}"
+
+											}
+
+										{/categories}
+
+										<script type="text/javascript">
+
+											cart.updateFlagStatus(cart.row['{row_id}'].pricing_status,'{row_id}');
+
+										</script>
+
+										<!-- REMOVE -->
+										<div class="cart-remove" align="right">
+											<input type="checkbox" id="delete_this_{row_id}" value="yes" name="delete[{row_id}]">Remove this item<br>
+											<button class="smallButton" type="submit" value="store/index{if segment_3}/coupon/{segment_3}{/if}" name="return" onclick="javascript: return cart.submitCart();">Confirm</button>
+										</div>
+
+										<!-- SUBTOTAL -->
+										<div class="cart-subtotal" align="right">
+											<span id="row_subtotal_{row_id}"></span><br>
+											<span id="row_discount_{row_id}"></span>
+											<span id="row_coupon_{row_id}"></span><br>
+											<span id="row_total_{row_id}"></span>
+										</div>
+
+										<!-- SAVE DATA BACK TO ORDER ITEM -->
+										<input type="hidden" id="attributes_{row_id}" name="item_options[{row_id}][purchased_attributes]" value="">
+										<input type="hidden" id="price_{row_id}" name="price[{row_id}]" value="">
+
+									</div>
+
+									<div align="right">
+
+										{embed="store/attribute_category"
+
+											entry_id = "{entry_id}"
+											row_id = "{row_id}"
+											quantity = "{quantity}"
+											purchased_attributes = "{item_options:purchased_attributes}"
+
+										}
+
+									</div>
+
+							</div>
+
+							<div class="container">
+
+								<!-- ON SELECT CHANGE -->
+								<script type="text/javascript">
+
+									// Quantity Listener
+									$('#product_quantity_{row_id}').change(function(){
+
+										this.value = this.value.replace(/[^0-9\.]/g,'');
+
+										cart.updateCartPrice();
+
+									});
+
+									// Set initial option pricing
+									cart.createOptionPrices('{row_id}');
+
+								</script>
+
+								<div class="itemDivider container"></div>
+
+								<!-- END CART ITEM ROW -->
+								{if last_row}
+
+									<div class="cart-totalSpacer" align="right">
+
+										<!-- Coupon code -->
+										<div class="cart-couponSpacer" id="couponCode"></div>
+
+										<!-- Cart totals -->
+										<div id="cart_discount_price" align="right"></div>
+										<div id="cart_total_price" align="right"></div>
+
+										<script type="text/javascript">
+
+											keychain.checkPixfizzLogin(keychain.userId,'{segment_1}',function(){
+
+												// Get the cart data
+												cart.fetchItems();
+
+											});
+
+											// Update total cart price
+											cart.prepCoupon();
+											cart.updateCartPrice();
+
+										</script>
+
+										<div align="right"><button type="submit" value="store/shipping/{segment_3}" name="return" class="majorButton" onclick="javascript: return cart.submitCart();">Continue to Delivery Method</button></div>
+
+									</div>
+
+								{/if}
+
+							</div>
+
+						{/exp:cartthrob:cart_items_info}
+
+					{/exp:cartthrob:update_cart_form}
+
+				{if:else}
+
+					{embed="store/no_results"}
+
+				{/if}
+
+			</div>
+
+			<!-- FOOTER -->
+			{embed="global/footer"}
+
+		</div>
+
+	<!-- LOGIN -->
+	{if:else}
+
+		<iframe id="pixfizzLogout" src="{pixfizz_url}/site/logout_check" width="0" height="0" marginheight="0" marginwidth="0" frameborder="0" seemless></iframe>
+
+		{embed="global/login"
+
+			forced = "true"
+			abort = "{site_url}"
+			alert = "undefined"
+			return = "{segment_1}/{segment_2}/{segment_3}"
+
+		}
+
+	{/if}
+
+</body>
+</html>

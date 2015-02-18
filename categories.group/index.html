@@ -1,0 +1,261 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
+<head>
+	{embed="global/stage" title="&nbsp;{segment_3}"}
+
+	<!-- Fancy Stuff -->
+	<script src="{site_url}scripts/jquery.ez-pinned-footer.js" type="text/javascript" charset="utf-8"></script>
+	<script src="{path=lightbox/script}" type="text/javascript" charset="utf-8"></script>
+	
+</head>
+
+<!-- BODY -->
+<body>
+
+	{if logged_in}
+
+		{exp:profile:view}
+
+			<script type="text/javascript">
+
+				keychain.userId = '{pixfizz_user_id}';
+				keychain.checkPixfizzLogin(keychain.userId,'{segment_1}/{segment_2}',function(){});
+				
+			</script>
+
+		{/exp:profile:view}
+
+	{if:else}
+
+		<iframe id="pixfizzLogout" src="{pixfizz_url}/site/logout_check" width="0" height="0" marginheight="0" marginwidth="0" frameborder="0" seemless></iframe>
+
+	{/if}
+
+	<div align="center">
+
+		<!-- HEADER -->
+		{embed="global/header"}
+
+		<div class="canvas">
+
+			<!-- CONTENT -->
+			{exp:channel:categories
+
+				channel = "categories"
+				category_group = "{segment_2}"
+				style = "linear"
+
+			}
+
+				{if count == "1"}
+					{embed="global/title" title="{category_name}"}
+				{/if}
+
+			{/exp:channel:categories}
+
+			<div class="container" id="blocks">
+
+				{exp:channel:categories 
+
+					channel = "categories"
+					category_group = "{segment_2}"
+					style = "linear"
+
+				}
+
+					{exp:channel:entries
+
+						channel = "landing_page"
+						category = "{category_id}"
+						limit = "1"
+						dynamic = "off"
+						disable = "pagination|category_fields|member_data"
+
+					}
+
+						<!-- IF LANDING PAGE -->
+						{if landing_body != ""}
+							{embed="categories/thumb"
+
+								path="{site_url}index.php/services/C{category_id}"
+
+								category_image="{category_image}"
+								category_name="{category_name}"
+								category_description="{category_description}"
+
+							}
+
+						<!-- ALTERNATE URL -->
+						{if:elseif landing_url != ""}
+							{embed="categories/thumb"
+
+								path="{landing_url}"
+
+								category_image="{category_image}"
+								category_name="{category_name}"
+								category_description="{category_description}"
+
+							}
+
+						<!-- IF STORE PAGE -->
+						{if:elseif store_type != "-"}
+
+							{if store_type == "print"}
+								{embed="categories/thumb"
+
+									path = "{site_url}index.php/prints/{category_id}/{group_print}"
+									entry_id = "{entry_id}"
+
+									category_id = "{category_id}"
+									category_image = "{category_image}"
+									category_name = "{category_name}"
+									category_description = "{category_description}"
+
+								}
+
+							{if:elseif store_type == "card"}
+								{embed="categories/thumb"
+
+									path = "{site_url}index.php/cards/{category_id}/{group_card}"
+									entry_id = "{entry_id}"
+
+									category_id = "{category_id}"
+									category_image = "{category_image}"
+									category_name = "{category_name}"
+									category_description = "{category_description}"
+
+								}
+
+							{if:elseif store_type == "stationery"}
+								{embed="categories/thumb"
+
+									path = "{site_url}index.php/stationery/{category_id}/{group_stationery}"
+									entry_id = "{entry_id}"
+
+									category_id = "{category_id}"
+									category_image = "{category_image}"
+									category_name = "{category_name}"
+									category_description = "{category_description}"
+
+								}
+
+							{if:elseif store_type == "canvas"}
+								{embed="categories/thumb"
+
+									path = "{site_url}index.php/canvas/{category_id}/{group_canvas}"
+									entry_id = "{entry_id}"
+
+									category_id = "{category_id}"
+									category_image = "{category_image}"
+									category_name = "{category_name}"
+									category_description = "{category_description}"
+
+								}
+
+							{if:elseif store_type == "metal"}
+								{embed="categories/thumb"
+
+									path = "{site_url}index.php/metal/{category_id}/{group_metal}"
+									entry_id = "{entry_id}"
+
+									category_id = "{category_id}"
+									category_image = "{category_image}"
+									category_name = "{category_name}"
+									category_description = "{category_description}"
+
+								}
+
+							{if:elseif store_type == "frame"}
+								{embed="categories/thumb"
+
+									path = "{site_url}index.php/framed/{category_id}/{group_frame}"
+									entry_id = "{entry_id}"
+
+									category_id = "{category_id}"
+									category_image = "{category_image}"
+									category_name = "{category_name}"
+									category_description = "{category_description}"
+
+								}
+
+							{if:elseif store_type == "gallery"}
+								{embed="categories/thumb"
+
+									path = "{site_url}index.php/gallery/{category_id}/{group_gallery}"
+									entry_id = "{entry_id}"
+
+									category_id = "{category_id}"
+									category_image = "{category_image}"
+									category_name = "{category_name}"
+									category_description = "{category_description}"
+
+								}
+
+							{if:elseif store_type == "book"}
+								{embed="categories/thumb"
+
+									path = "{site_url}index.php/books/{category_id}/{group_book}"
+									entry_id = "{entry_id}"
+
+									category_id = "{category_id}"
+									category_image = "{category_image}"
+									category_name = "{category_name}"
+									category_description = "{category_description}"
+
+								}
+
+							{if:elseif store_type == "gift"}
+								{embed="categories/thumb"
+
+									path = "{site_url}index.php/gifts/{category_id}/{group_gift}"
+									entry_id = "{entry_id}"
+
+									category_id = "{category_id}"
+									category_image = "{category_image}"
+									category_name = "{category_name}"
+									category_description = "{category_description}"
+
+								}
+
+							{if:elseif store_type == "class"}
+								{embed="categories/thumb"
+
+									path = "{site_url}index.php/classes/{category_id}/{group_class}"
+									entry_id = "{entry_id}"
+
+									category_id = "{category_id}"
+									category_image = "{category_image}"
+									category_name = "{category_name}"
+									category_description = "{category_description}"
+
+								}
+
+							{/if}
+
+						{/if}
+
+					{/exp:channel:entries}
+
+				{/exp:channel:categories}
+
+			</div>
+
+		</div>
+
+		<!-- FOOTER -->
+		{embed="global/footer"}
+
+		<!-- LIGHTBOX -->
+		{embed="lightbox/index"}
+
+		<!-- LOGIN -->
+		{embed="global/login"}
+
+	</div>
+
+</body>
+</html>

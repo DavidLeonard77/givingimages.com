@@ -1,0 +1,104 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
+<head>
+	{embed="global/stage" title=""}
+</head>
+
+<!-- BODY -->
+<body>
+
+	{if segment_4 != ""}
+
+		<!-- adds the book_id to EE cart item order_id -->
+		{exp:channel:entries
+
+			entry_id = "{segment_4}"
+			dynamic = "no"
+			limit = "1"
+			disable = "pagination|category_fields|member_data"
+			status = "{status_product}|Closed"
+
+		}
+
+			{exp:cartthrob:add_to_cart
+
+				entry_id = "{entry_id}"
+				item_options:purchased_order_id = "{segment_3}"
+				quantity = "1"
+				allow_user_price = "yes"
+
+			}
+
+		{/exp:channel:entries}
+
+	{/if}
+
+	{if logged_in}
+
+		{embed="global/wait_msg"
+
+			msg = "Creating your product" 
+
+		}
+
+		<!-- Adds the book_id to projects -->
+		{exp:profile:edit
+
+			id = "addToProjects"
+			return = "store/{segment_4}"
+
+		}
+
+			<input type="hidden" id="projects" name="projects" value="{projects}">
+
+			<script type="text/javascript">
+
+				cart.thisBook = '{segment_3}';
+				projects.projectItems = projects.scrubString('{projects}');
+				projects.orderedItems = projects.scrubString('{ordered_projects}');
+
+				// Save the project if it's new
+				projects.itemCheck(cart.thisBook,projects.orderedItems,function(){
+
+					// Save Px project to user's accound
+					projects.itemCheck(cart.thisBook,projects.projectItems,function(){
+
+						projects.saveProject(cart.thisBook,projects.projectItems);
+
+					// EE Product
+					},function(){
+
+						toolbox.docLoc('{site_url}index.php/store/{segment_4}');
+
+					});
+
+				},function(){
+
+					toolbox.docLoc('{site_url}index.php/store/{segment_4}');
+
+				});
+
+			</script>
+
+		{/exp:profile:edit}
+
+	<!-- Get them to log-in -->
+	{if:else}
+
+		{embed="global/login"
+
+			forced = "true"
+			abort = "{site_url}"
+			alert = "{login_message_forced}"
+			return = "{segment_1}/{segment_2}/{segment_3}/{segment_4}"
+
+		}
+
+	{/if}
+
+</body>
+</html>

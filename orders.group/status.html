@@ -1,0 +1,10 @@
+<div><div class="smallButton" onclick="javascript: orders.getOrder();">View</div></div>
+<div><input id="orderIdField" type="text" placeholder="order number"></div>
+
+<div><div class="statusButton bgcolor-darkGrey" onclick="javascript: orders.viewOrders('closed',orders.view.department)">Closed</div></div>
+<div><div class="statusButton bgcolor-darkNavy" onclick="javascript: orders.viewOrders('Shipped',orders.view.department)">Shipped</div></div>
+<div><div class="statusButton bgcolor-turquoise" onclick="javascript: orders.viewOrders('In Transit',orders.view.department)">In Transit</div></div>
+<div><div class="statusButton bgcolor-teal" onclick="javascript: orders.viewOrders('Ready for Pickup',orders.view.department)">Ready For Pickup</div></div>
+<div><div class="statusButton bgcolor-navy" onclick="javascript: orders.viewOrders('In Production',orders.view.department)">In Production</div></div>
+<div><div class="statusButton bgcolor-green" onclick="javascript: orders.viewOrders('New Order',orders.view.department)">New Orders</div></div>
+<div><div class="statusButton bgcolor-darkGrey" onclick="javascript: orders.viewOrders('{order_status_all}',orders.view.department)">View All</div></div>

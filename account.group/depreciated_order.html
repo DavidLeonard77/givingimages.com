@@ -1,0 +1,53 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
+<head>
+	{embed="global/stage" title=""}
+
+</head>
+<body>
+
+	{if logged_in}
+
+		{embed="global/wait_msg"
+
+			msg = "Please wait while we load your project"
+
+		}
+
+		<!-- Find a matching entry_id for the theme_id -->
+		{exp:channel:entries
+
+			dynamic = "off"
+			limit = "1"
+			url_title = "url{segment_3}"
+			status = "{status_product}"
+			disable = "category_fields|pagination|member_data"
+
+		}
+			<script type="text/javascript">
+
+				toolbox.docLoc('{site_url}index.php/store/add_book/{segment_4}/{entry_id}');
+
+			</script>
+
+		{/exp:channel:entries}
+
+	{if:else}
+
+		{embed="global/login"
+
+			forced = "true"
+			abort = "{site_url}"
+			alert = "undefined"
+			return = "{segment_1}/{segment_2}/{segment_3}/{segment_4}"
+
+		}
+
+	{/if}
+
+</body>
+</html>

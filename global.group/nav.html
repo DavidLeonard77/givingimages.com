@@ -1,0 +1,7 @@
+<div class="nav">
+	{exp:channel:categories show="{embed:category}" dynamic="off" limit="1" style="linear"}
+		<div class="navSpacer">
+			<div class="optionItemBox optionItemButton navMenuTxt" onclick="javascript: toolbox.docLoc('{site_url}index.php/{embed:path}');">{embed:txt}{category_name}</div>
+		</div>
+	{/exp:channel:categories}
+</div>

@@ -1,0 +1,181 @@
+{exp:channel:entries
+
+	channel = "order"
+	entry_id = "{segment_3}"
+	dynamic = "off"
+	status = "{order_status_all}"
+
+}
+
+	<div>
+
+		<div class="logo"></div>
+
+		<span id="departmentTitle_{segment_5}" class="strong"></span> ~ Ticket {segment_5} of <span id="ticketTotal_{segment_5}"></span>
+
+	</div>
+
+	<div class="customerInfo">
+
+		<div>
+
+			{entry_id} ~ <span class="strong">{order_billing_last_name}, {order_billing_first_name}</span><br>
+
+		</div>
+
+		<div align="right">
+
+			<span class="strong">{order_customer_phone}</span><br>
+
+			{order_customer_email}
+
+		</div>
+
+	</div>
+
+	<div class="itemDivider"></div>
+
+	<div class="customerShipping">
+
+		<div>
+
+			{if order_pickup_location == "Deliver to my shipping address"}
+				<span class="strong color-teal">Shipping Address</span><br>
+				{order_shipping_first_name} {order_shipping_last_name}<br>
+				{order_shipping_address}<br>
+				{if order_shipping_address_2}{order_shipping_address_2}<br>{/if}
+				{order_shipping_city}<br>
+				{order_shipping_state}, {order_shipping_zip}<br>
+			{if:else}
+				<span class="strong">Pickup Location</span><br>
+				{order_pickup_location}<br>
+			{/if}
+
+			{if order_notes}
+				<br>
+				<span class="strong">Customer Notes</span><br>
+				{order_notes}<br>
+			{/if}
+
+			{if order_customer_notes}
+				<br>
+				<span class="strong">Order Notes</span><br>
+				{order_customer_notes}<br>
+			{/if}
+
+			{if order_tracking_number}
+				<br>
+				<span class="strong">Shipping Information</span><br>
+				Via {order_shipping_company} ( tracking #{order_tracking_number} )<br>
+			{/if}
+
+		</div>
+
+		<div align="right">
+
+			<div class="strong">{entry_date format="%M %d at %g:%i%a"}</div>
+
+			<br>
+
+			<div class="orderTotal">
+
+				<div>
+					<span id="order_subtotal_{segment_5}"></span><br>
+					<span id="order_shipping_cost_{segment_5}"></span><br>
+					<span id="order_tax_{segment_5}"></span><br>
+					<br>
+					<span id="order_total_{segment_5}" class="strong"></span><br>
+					{if order_coupon}<span class="strong"></span><br>{/if}
+				</div>
+
+				<div>
+					Subtotal<br>
+					Shipping<br>
+					Tax<br>
+					<br>
+					<span class="strong">Order Total</span><br>
+					{if order_coupon}Coupon code<br>{/if}
+				</div>
+
+			</div>
+
+			<span id="order_payment_status_{segment_5}"></span><br>
+
+		</div>
+
+	</div>
+
+	<br>
+	<br>
+
+	{exp:cartthrob:order_items order_id="{entry_id}"}
+
+		{if item:count == 1}<span>Total items: {item:total_results}</span>{/if}
+
+		<div class="itemDivider"></div>
+
+		<div id="itemRow_{segment_5}_{item:count}" class="ticketItem">
+
+			<div>
+
+				<span class="strong">{item:entry_id}</span> item <span class="strong">{item:count}</span> of {item:total_results}<br>
+				<br>
+
+				<div id="purchased_attributes_{segment_5}_{item:count}"></div>
+
+				{if item:purchased_custom_imprinting}
+					<br>
+					<span class="strong">Custom Imprinting</span><br>
+					{item:purchased_custom_imprinting}<br>
+				{/if}
+
+			</div>
+
+			<div>
+
+				<span class="strong">{item:title}</span><br>
+
+				<span id="fileName_{segment_5}_{item:purchased_order_id}"></span><br>
+
+				<br>
+				Quantity&nbsp;&nbsp;<span class="strong">{item:quantity}</span><br>
+				<br>
+				Subtotal&nbsp;&nbsp;<span id="subtotal_{segment_5}_{item:count}"></span>
+
+			</div>
+
+		</div>
+		<br>
+
+		{embed="orders/print_department"
+
+			category = "{segment_4}"
+			print_count = "{segment_5}"
+
+		}
+
+	{/exp:cartthrob:order_items}
+
+	<script type="text/javascript">
+
+		// Add to the page count
+		orders.order['{entry_id}'].loadCount++;
+
+		// Check if it's the final page
+		orders.checkPrintPage('{entry_id}',function(orderId){
+
+			// Output to DOM
+			orders.createPricing(orderId);
+			orders.createTicketFiles(orderId);
+			orders.createAttributes(orderId);
+			orders.checkTicketRows(orderId);
+			orders.createPagesNumbers(orderId);
+
+			// Print it
+			window.print();
+
+		});
+
+	</script>
+
+{/exp:channel:entries}

@@ -1,0 +1,116 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
+<head>
+
+	{embed="global/stage" title="&nbsp;orders"}
+
+	<link rel="stylesheet" href="{path=orders/style}" type="text/css">
+	<script src="{path=orders/script}" type="text/javascript" charset="utf-8"></script>
+
+</head>
+<body>
+
+	<!-- LOGIN -->
+	{if logged_in}
+
+		{if group_id == "1" || group_id == "6" || group_id == "7" || group_id == "8"}
+
+			{exp:profile:view}
+
+				<script type="text/javascript">
+
+					keychain.userId = '{pixfizz_user_id}';
+					keychain.checkPixfizzLogin(keychain.userId,'{segment_1}',function(){});
+
+				</script>
+
+			{/exp:profile:view}
+
+		{/if}
+
+	{/if}
+
+	<div align="center">
+
+		<!-- LOGIN -->
+		{if logged_in}
+
+			{if group_id == "1" || group_id == "6" || group_id == "7" || group_id == "8"}
+
+				<!-- LOGIN -->
+				{embed="global/login"}
+
+				<!-- HEADER -->
+				{embed="global/header"}
+
+				<!-- CONTENT -->
+				<div class="canvas">
+
+					<!-- title -->
+					<div class="titleSpacer">
+
+						<div>
+							<div class="title">Orders</div>
+						</div>
+
+						<div class="departmentSpacer">
+							{embed="orders/departments"}
+						</div>
+
+					</div>
+
+					<!-- Status Buttons -->
+					<div class="statusSpacer" align="right">
+						{embed="orders/status"}
+					</div>
+
+					<div id="processOrders"></div>
+					<div id="displayOrders" align="center"></div>
+
+					<!-- Load new orders to process -->
+					<script type="text/javascript">
+
+						orders.prepButtons();
+						orders.viewOrders(orders.view.status,orders.view.department);
+
+					</script>
+
+				</div>
+
+				<!-- FOOTER -->
+				{embed="global/footer"}
+
+			{if:else}
+
+				{embed="global/login"
+
+					forced = "true"
+					abort = "{site_url}"
+					alert = "undefined"
+					return = "{segment_1}"
+
+				}
+
+			{/if}
+
+		{if:else}
+
+			{embed="global/login"
+
+				forced = "true"
+				abort = "{site_url}"
+				alert = "undefined"
+				return = "{segment_1}"
+
+			}
+
+		{/if}
+
+	</div>
+	
+</body>
+</html>

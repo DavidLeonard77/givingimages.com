@@ -1,0 +1,56 @@
+{exp:profile:view}
+
+	<!-- Billing Info -->
+	<div class="cart-group" align="left">
+		<div class="header strong">Billing Address</div>
+		<div class="itemDivider"></div>
+
+		<div class="cart-fieldGroup" align="left">
+
+			{member_first_name}&nbsp;{member_last_name}<br>
+			{member_address}<br>
+			{if member_address2 != ""}{member_address2}<br>{/if}
+			{member_city}<br>
+			{member_state}&nbsp;{member_zip}
+
+		</div>
+	</div>
+
+	<!-- Phone -->
+	<div class="cart-group" align="left">
+		<div class="header strong">Telephone</div>
+		<div class="itemDivider"></div>
+
+		<div class="cart-fieldGroup" align="left">
+
+			{member_phone}
+
+		</div>
+	</div>
+
+	<!-- Shipping Info -->
+	<div class="cart-group" align="left">
+		<div class="header strong">{if member_pickup_location == 'Deliver to my shipping address'}Shipping Address{if:else}In-Store Pickup Location{/if}</div>
+		<div class="itemDivider"></div>
+
+		<div class="cart-fieldGroup" align="left">
+			<input id="order_pickup_location" name="order_pickup_location" value="{member_pickup_location}" type="hidden">
+
+			{if member_pickup_location == 'Deliver to my shipping address'}
+				{member_shipping_first_name}&nbsp;{member_shipping_last_name}<br>
+				{member_shipping_address}<br>
+				{if member_shipping_address2 != ""}{member_shipping_address2}<br>{/if}
+				{member_shipping_city}<br>
+				{member_shipping_state}&nbsp;{member_shipping_zip}
+			{if:else}
+				{member_pickup_location}
+			{/if}
+
+			<br>
+			<br>
+			<input type="button" name="changes" class="smallButton" value="Make Changes" onclick="javascript: toolbox.docLoc('{path='store/shipping/{segment_3}'}');">
+
+		</div>
+	</div>
+
+{/exp:profile:view}

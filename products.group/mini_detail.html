@@ -1,0 +1,72 @@
+<div class="overlayClose visibilityLarge zero">
+	<div onclick="javascript: zoom.hide();">x</div>
+</div>
+
+{exp:channel:entries
+
+	entry_id = "{segment_9}"
+	dynamic = "off"
+	limit = "1"
+	status = "{status_product}"
+	disable = "pagination|member_data"
+
+}
+
+	<!--  PREVIEW IMAGE  -->
+	<div class="mini-detail">
+
+		<div class="mini-previewSpacer">
+			<div id="productDetailMain"
+				 class="mini-bg-preview"
+				 style="background-image: url({preview_image_1:detail}); background-repeat: no-repeat; cursor: pointer;"
+				 onclick="javascript: toolbox.docLoc('{site_url}index.php/detail/{segment_3}/{segment_4}/{segment_5}/{segment_6}/{segment_7}/{segment_8}/{entry_id}');"></div>
+		</div>
+
+		<!--  PREVIEW THUMBS  -->
+		{if preview_image_2 != '' OR preview_image_3 != '' OR preview_image_4 != ''}
+			<div class="detailThumbSpacer">
+		<!-- <div style="float: right; width: 90px; padding-left: 10px;"> -->
+
+										  <div style="background-image: url('{preview_image_1:thumb}');" onclick="javascript: toolbox.backgroundSwap('productDetailMain','url({preview_image_1:detail})')"></div>
+				{if preview_image_2 != ''}<div style="background-image: url('{preview_image_2:thumb}');" onclick="javascript: toolbox.backgroundSwap('productDetailMain','url({preview_image_2:detail})')"></div>{/if}
+				{if preview_image_3 != ''}<div style="background-image: url('{preview_image_3:thumb}');" onclick="javascript: toolbox.backgroundSwap('productDetailMain','url({preview_image_3:detail})')"></div>{/if}
+				{if preview_image_4 != ''}<div style="background-image: url('{preview_image_4:thumb}');" onclick="javascript: toolbox.backgroundSwap('productDetailMain','url({preview_image_4:detail})')"></div>{/if}
+
+			</div>
+
+		{if:else}
+			<div class="detailThumbSpacer" onclick="javascript: zoom.hide();"></div>
+		{/if}
+
+	</div>
+
+	<div id="previewAttributes" class="visibilityLarge"></div>
+
+	{categories}
+
+		{embed="detail/attribute"
+
+			category = "{category_id}"
+			entry_id = "{entry_id}"
+
+		}
+
+	{/categories}
+
+	<script type="text/javascript">
+
+		zoom.previewOptions('{entry_id}');
+
+	</script>
+
+{/exp:channel:entries}
+
+<!-- Add to recently viewed Lightbox -->
+{exp:remember_me:set entry_id="{segment_9}"}
+
+<script type="text/javascript" language="javascript">
+
+	zoom.loaded();
+	lightbox.refreshLightbox('recents');
+
+</script>

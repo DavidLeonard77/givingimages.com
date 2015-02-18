@@ -1,0 +1,56 @@
+{exp:channel:entries
+
+	channel = "product_attribute"
+	dynamic = "no"
+	category = "{embed:category}"
+	disable = "pagination|member_data"
+
+}
+
+	<div class="product_attribute_description" id="product_attribute_description_{entry_id}">{product_attribute_description}</div>
+
+	<script type="text/javascript">
+
+		if (!cart.row['{embed:row_id}'].field['{url_title}']) {
+
+			// Initialize field
+			cart.row['{embed:row_id}'].field['{url_title}'] = {
+
+				title: '{product_attribute_title}',
+				icon: '{product_attribute_icon}',
+				description: $('#product_attribute_description_{entry_id}').html(),
+				pricing_model: '{product_attribute_pricing_model}',
+				selection_type: '{product_attribute_selection_type}',
+				selected_options: '',
+				option: {}
+
+			};
+
+		}
+
+	</script>
+
+	{product_attribute_options}
+
+		<script type="text/javascript">
+
+			cart.row['{embed:row_id}'].field['{url_title}'].option['{option_value}'] = {
+
+				title: '{option_name}',
+				price: '{price}',
+				percent: '{percent}',
+				color: '{color}'
+
+			}
+
+		</script>
+
+	{/product_attribute_options}
+
+	<script type="text/javascript">
+
+		cart.createOption('{embed:row_id}','{url_title}','{embed:purchased_attributes}');
+
+	</script>
+
+{/exp:channel:entries}

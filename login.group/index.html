@@ -1,0 +1,79 @@
+<div class="overlayClose visibilityLarge zero">
+	<div onclick="javascript: keychain.closeLogin();">x</div>
+</div>
+
+<div class="login-panelSpacer">
+
+	<!--LOGIN-->
+	<div id="panelLogin" class="optionItemBox" align="center">
+
+		{exp:member:login_form
+
+			id = "loginSubmitForm"
+			return = "{segment_2}/{segment_3}/{segment_4}/{segment_5}/{segment_6}/{segment_7}/{segment_8}/{segment_9}"
+
+		}
+
+			<div class="loginTitleSpacer">
+				Returning Customers<br>
+				please log in
+			</div>
+
+			<input id="loginUsername" class="loginInputField" type="text" name="username" value="" placeholder="Email"><br>
+			<input id="loginPassword" class="loginInputField" type="password" name="password" value="" placeholder="Password"><br>
+
+		{/exp:member:login_form}
+
+		<div class="formSubmitTxt-login" align="center">
+			<div onclick="javascript: keychain.loginSubmit(function(){ $('#loginSubmitForm').submit(); });">login</div>
+		</div>
+
+		<div class="loginTxt visibilitySmall"><a href="javascript: keychain.showRegistration();">Create an account</a></div>
+		<div class="loginTxt"><a href="javascript: keychain.gotoSendPassword();">Forgot your password?</a></div>
+
+	</div>
+
+	<!--REGISTER-->
+	<div id="panelRegister" class="panelRegister optionItemBox visibilityLarge" align="center">
+
+		{exp:profile:register
+
+			id = "registerSubmitForm"
+			return = "{segment_2}/{segment_3}/{segment_4}/{segment_5}/{segment_6}/{segment_7}/{segment_8}/{segment_9}"
+
+		}
+
+			<div class="loginTitleSpacer">
+				New Members<br>
+				please register
+			</div>
+
+			<input id="pixfizz_user_id" type="hidden" name="pixfizz_user_id">
+
+			<div class="login-registerSpacer">
+
+				<div>
+					<input id="member_first_name" class="loginInputField" type="text" name="member_first_name" placeholder="First Name"><br>
+					<input id="member_last_name" class="loginInputField" type="text" name="member_last_name" placeholder="Last Name">
+				</div>
+
+				<div>
+					<input id="registerEmail" class="loginInputField" type="text" name="email" placeholder="Email"><br>
+					<input id="confirmEmail" class="loginInputField" type="text" name="email_confirm" placeholder="Confirm Email"><br>
+					<input id="registerPassword" class="loginInputField" type="password" name="password" placeholder="Password"><br>
+					<input id="confirmPassword" class="loginInputField" type="password" name="password_confirm" placeholder="Confirm Password">
+				</div>
+
+			</div>
+
+		{/exp:profile:register}
+
+		<div class="formSubmitTxt-register" align="center">
+			<div onclick="javascript: keychain.registrationSubmit(function(){ $('#registerSubmitForm').submit(); });">register</div>
+		</div>
+
+		<div class="loginTxt visibilitySmall"><a href="javascript: keychain.hideRegistration();">I already have an account</a></div>
+
+	</div>
+
+</div>

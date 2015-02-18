@@ -1,0 +1,11 @@
+{exp:channel:categories channel="{embed:channel}" category_group="{embed:cat_1}" style="linear"}
+	{exp:channel:entries channel="{embed:channel}" category="{category_id}" dynamic="off" limit="1"}
+
+		<div class="block-spacer">
+			<div class="block-bg thumb"
+				 style="background-image: url('{category_image}');"
+				 onclick="javascript: toolbox.docLoc('/index.php/vendor/{category_id}');"></div>
+		</div>
+
+	{/exp:channel:entries}
+{/exp:channel:categories}

@@ -1,0 +1,6 @@
+{if segment_3 == "favorites"}
+	<script type="text/javascript" language="javascript"> lightbox.loadLightbox('{exp:remember_me:load list="{segment_3}" reverse="yes"}','{segment_3}','favorite%20items'); </script>
+
+{if:elseif segment_3 == "recents"}
+	<script type="text/javascript" language="javascript"> lightbox.loadLightbox('{exp:remember_me:get reverse="yes"}','{segment_3}','recently%20viewed%20items'); </script>
+{/if}

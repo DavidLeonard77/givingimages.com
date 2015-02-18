@@ -1,0 +1,115 @@
+<!-- PRICING -->
+{exp:channel:entries
+
+	channel = "product_pricing"
+	dynamic = "no"
+	category = "{embed:category}"
+	status = "{status_price}"
+	disable = "pagination|member_data"
+	limit = "1"
+
+}
+
+	<script type="text/javascript">
+
+		cart.row['{embed:row_id}'].price_override = '{product_price_override}';
+		cart.row['{embed:row_id}'].quantity_min = cart.formatQuantity('{product_minimum_quantity}');
+		cart.row['{embed:row_id}'].quantity_set = cart.formatQuantity('{product_set_quantity}');
+		cart.row['{embed:row_id}'].pricing_status = '{status}';
+
+		cart.checkQuantity('{embed:row_id}');
+
+	</script>
+
+	{product_pricing_model}
+
+		<script type="text/javascript">
+
+			cart.row['{embed:row_id}'].pricing_model['{option_value}'] = {
+
+				title: '{option_name}',
+				price: '{price}',
+				percent: '{percent}'
+
+			};
+
+			cart.row['{embed:row_id}'].pricing_model['{option_value}'].price = toolbox.floatPrice(cart.getQuantityPrice('{embed:row_id}','{option_value}'));
+
+		</script>
+
+	{/product_pricing_model}
+
+{/exp:channel:entries}
+
+<!-- COUPON -->
+{exp:channel:entries
+
+	channel = "store_coupon"
+	dynamic = "no"
+	category = "{embed:category}"
+	disable = "pagination|member_data"
+
+}
+
+	{if '{segment_3}' == '{title}'}
+
+		<script type="text/javascript">
+
+			cart.coupon['{segment_3}'] = {
+
+				itemDiscount: '{store_coupon_discount_item}',
+				cartDiscount: '{store_coupon_discount_cart}',
+				priceMin: '{store_coupon_min_price}',
+				quantityMin: parseInt('{store_coupon_min}'),
+				quantityMax: parseInt('{store_coupon_max}'),
+				quantityCount: 0,
+				usageLimit: false,
+				inputHTML: cart.prepCouponHTML('{segment_3}')
+
+			};
+
+			cart.row['{embed:row_id}'].coupon = '{segment_3}';
+
+		</script>
+
+		{if store_coupon_limit == "Once per customer"}
+
+			<script type="text/javascript">
+
+				cart.coupon['{segment_3}'].usageLimit = true;
+
+				// Valid coupon
+				cart.checkCouponUsage('{segment_3}',function(){
+
+				// Invalid coupon
+				},function(invalid){
+
+					alert('Coupon "' + invalid + '" has already been used');
+					toolbox.docLoc('{site_url}index.php/store/');
+
+				});
+
+			</script>
+
+		{/if}
+
+	{/if}
+
+{/exp:channel:entries}
+
+<!-- DEPARTMENTS -->
+{exp:channel:entries
+
+	entry_id = "{embed:entry_id}"
+	dynamic = "no"
+	category = "{embed:category}"
+	category_group = "{cat_departments}"
+	status= "{status_product}"
+	disable = "pagination|member_data"
+	limit = "1"
+
+}
+
+	<input type="hidden" id="department_{embed:row_id}" name="item_options[{embed:row_id}][purchased_department]" value="{embed:category}">
+
+{/exp:channel:entries}

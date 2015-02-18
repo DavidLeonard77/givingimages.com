@@ -1,0 +1,49 @@
+																	<br>
+																	<br>
+																	<br>
+																	</span>
+																</td>
+																<td width="40"></td>
+															</tr>
+														</table>
+													</td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td height="101">
+								<img src="{site_url}graphics/graphics/email_footer.png" width="762" height="101" border="0" usemap="#footer">
+								<map name="footer">
+									<area shape="rect" coords="700,36,727,63" href="http://vimeo.com/user3757155" alt="vimeo">
+									<area shape="rect" coords="663,36,690,63" href="https://www.facebook.com/pages/Lakeside-Camera-Photoworks/72495486336" alt="facebook">
+									<area shape="rect" coords="590,36,617,63" href="http://pinterest.com/lakesidecamera/" alt="pinterest">
+									<area shape="rect" coords="626,36,653,63" href="http://twitter.com/#!/lakesidecamera" alt="twitter">
+								</map>
+							</td>
+						</tr>
+					</table>
+					<table width="762" cellpadding="0" cellspacing="0">
+						<tr>
+							<td align="center">
+								<span class="note">
+									<br>
+									{exp:channel:entries channel="store_contact" dynamic="off" limit="1" sort="asc" disable="pagination|category_fields|member_data"}
+										eMail <a href="mailto:{contact_email}">{contact_email}</a>&nbsp;&nbsp;&nbsp;&nbsp;Telephone {contact_tel}
+									{/exp:channel:entries}
+									<br>
+									<br>
+									<br>
+								</span>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

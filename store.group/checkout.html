@@ -1,0 +1,275 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
+<head>
+	{embed="global/stage_ssl" title="&nbsp;checkout"}
+
+</head>
+
+<!-- BODY -->
+<body>
+
+	{if logged_in}
+
+		{exp:profile:view}
+
+			<script type="text/javascript">
+
+				keychain.userId = '{pixfizz_user_id}';
+
+				projects.orderedItems = '{ordered_projects}';
+
+			</script>
+
+		{/exp:profile:view}
+
+		<div align="center">
+
+			<!-- HEADER -->
+			{embed="global/header"}
+
+			<div class="canvas">
+
+				{embed="global/title" title="Checkout"}
+
+				{if logged_in}
+
+					{if "{exp:cartthrob:total_items_count}" > 0}
+
+						<script type="text/javascript">
+
+							cart.cartDiscount = toolbox.floatPrice('{exp:cartthrob:cart_discount}');
+							cart.cartTotal = toolbox.preciseRound(toolbox.floatPrice('{exp:cartthrob:cart_subtotal}') - cart.cartDiscount,2);
+
+						</script>
+
+						<!-- SECTION NAV -->
+						<div class="container">
+
+							{embed="store/nav" path="default" title="Continue Shopping"}
+
+							{if segment_3 && "{segment_3}" != "ct_save_order"}
+								{embed="store/nav" path="store/coupon/{segment_3}" title="Cart Items"}
+								{embed="store/nav" path="store/shipping/{segment_3}" title="Delivery Method"}
+							{if:else}
+								{embed="store/nav" path="store" title="Cart Items"}
+								{embed="store/nav" path="store/shipping" title="Delivery Method"}
+							{/if}
+
+						</div>
+
+						{exp:profile:view}
+
+							{if member_pickup_location != 'Deliver to my shipping address' && segment_3 == 'ct_save_order'}
+
+								<!-- If Pickup and Pay at Pickup selected -->
+								{exp:cartthrob:checkout_form 
+
+									error_handling = "inline"
+									name = "submitOrder"
+									gateways="authorize_net|ct_save_order"
+									secure_action = "yes"
+
+									return = "store/order_info"
+
+								}
+
+									<div class="container cart-checkoutSpacer">
+
+										<!-- LEFT SIDE -->
+										<div class="cart-summary">
+
+											<!-- NOT PAID IN STORE PICKUP -->
+											<input type="hidden" name="order_payment_status" value="Not Paid">
+											<div class="inactive zero">{exp:cartthrob:gateway_select name="gateway" selected="{segment_3}"}</div>
+
+											{embed="store/order"}
+
+										</div>
+
+										<!-- RIGHT SIDE -->
+										<div class="cart-gatewayFields">
+
+											{embed="store/options"}
+
+										</div>
+
+									</div>
+
+									<!-- TOTAL -->
+									<div class="itemDivider container"></div>
+
+									<div class="container">
+
+										<div class="cart-totalSpacer">
+
+											<div id="cart_total_price" align="right"></div>
+											<div id="cart_total_tax" align="right"></div>
+											<div id="cart_shipping" align="right"></div>
+											<div id="cart_final_price" class="strong" align="right"></div>
+
+											<script type="text/javascript">
+
+												cart.checkoutTotal('{exp:cartthrob:cart_total}','{exp:cartthrob:cart_tax}','{exp:cartthrob:cart_shipping}');
+
+											</script>
+
+											<div align="right"><button type="submit" class="majorButton">Complete your Order</button></div>
+
+										</div>
+
+									</div>
+
+								{/exp:cartthrob:checkout_form}
+
+							{if:else}
+
+								<!-- If CC Payment -->
+								{exp:cartthrob:checkout_form 
+
+									error_handling = "inline"
+									name = "submitOrder"
+									gateways = "authorize_net|ct_save_order"
+
+									rules:credit_card_number = "required"
+									rules:expiration_month = "required"
+									rules:expiration_year = "required"
+									rules:card_type = "required"
+									secure_action = "yes"
+
+									return = "store/order_info"
+
+								}
+
+									<div class="container cart-checkoutSpacer">
+
+										<!-- LEFT SIDE -->
+										<div class="cart-summary">
+
+											<!-- CC PAYMENT METHOD -->
+											<div class="inactive zero">{exp:cartthrob:gateway_select name="gateway" selected="authorize_net"}</div>
+
+											{embed="store/order"}
+
+										</div>
+
+										<!-- RIGHT SIDE -->
+										<div class="cart-gatewayFields">
+
+											<!-- REPORT ERRORS -->
+											{if errors_exist}
+												<div class="cart-group" align="right">
+													<div class="header strong">Errors ({errors}{if first_error}{error:total_results}{/if}{/errors})</div>
+													<div class="itemDivider"></div>
+
+													<div class="cart-fieldGroup errorInline" align="right">
+
+														{errors}
+															{if field_error}
+																<script type="text/javascript"> $("#errorInline").after('<span>{error}</span>'); </script>
+															{/if} 
+														{/errors}
+
+														{errors}
+															<div id="errorInline"></div>
+															{if global_error}<span>Error</span>{/if} 
+															{error}
+														{/errors}
+
+													</div>
+												</div>
+											{/if}
+
+											{embed="store/options"}
+
+											<!-- CC Fields -->
+											<div id="checkout_form_gateway_fields">{gateway_fields}</div>
+
+										</div>
+
+									</div>
+
+									<!-- TOTAL -->
+									<div class="itemDivider container"></div>
+
+									<div class="container">
+
+										<div class="cart-totalSpacer">
+
+											<div id="cart_total_price" align="right"></div>
+											<div id="cart_total_tax" align="right"></div>
+											<div id="cart_shipping" align="right"></div>
+											<div id="cart_final_price" class="strong" align="right"></div>
+
+											<script type="text/javascript">
+
+												cart.checkoutTotal('{exp:cartthrob:cart_total}','{exp:cartthrob:cart_tax}','{exp:cartthrob:cart_shipping}');
+
+											</script>
+
+											<div align="right"><button type="submit" class="majorButton">Submit Payment</button></div>
+
+										</div>
+
+									</div>
+
+									<div class="cart-securitySpacer container">
+
+										<div align="center">
+											<!-- webbot  bot="HTMLMarkup" startspan -->
+
+											<!-- GeoTrust QuickSSL [tm] Smart  Icon tag. Do not edit. -->
+											<script language="javascript" type="text/javascript" src="//smarticon.geotrust.com/si.js"></script>
+											<!-- end  GeoTrust Smart Icon tag -->
+
+											<!-- webbot  bot="HTMLMarkup" endspan -->
+										</div>
+
+										<div align="center"><img src="/graphics/graphics/ssl_trusted_seal.png"></div>
+
+										<div align="center"><img src="/graphics/graphics/click-seal.png"></div>
+
+									</div>
+
+								{/exp:cartthrob:checkout_form}
+
+							{/if}
+
+						{/exp:profile:view}
+
+					{if:else}
+
+						{embed="store/no_results"}
+
+					{/if}
+
+				{/if}
+
+			</div>
+
+			<!-- FOOTER -->
+			{embed="global/footer"}
+
+		</div>
+
+	<!-- LOGIN -->
+	{if:else}
+
+		<iframe id="pixfizzLogout" src="{pixfizz_url}/site/logout_check" width="0" height="0" marginheight="0" marginwidth="0" frameborder="0" seemless></iframe>
+
+		{embed="global/login"
+
+			forced = "true"
+			abort = "{site_url}"
+			alert = "undefined"
+			return = "{segment_1}/{segment_2}/{segment_3}"
+
+		}
+
+	{/if}
+
+</body>
+</html>

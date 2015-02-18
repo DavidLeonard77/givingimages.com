@@ -1,0 +1,257 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
+<head>
+	{embed="global/stage" title="&nbsp;{segment_2}"}
+
+	<!-- PIXFIZZ -->
+	<script src="http://api.pixfizz.com/js_api/start-0.3.js" type="text/javascript" data-px-website="{pixfizz_editor_url}"></script>
+
+	<!-- Fancy Stuff -->
+	<script src="{site_url}scripts/jquery.ez-pinned-footer.js" type="text/javascript"></script>
+	<script src="{path=lightbox/script}" type="text/javascript"></script>
+
+</head>
+
+<!-- BODY -->
+<body>
+
+	{if logged_in}
+
+		{exp:profile:view}
+
+			<script type="text/javascript">
+
+				keychain.userId = '{pixfizz_user_id}';
+				keychain.checkPixfizzLogin(keychain.userId,'{segment_1}/{segment_2}/{segment_3}/{segment_4}/{segment_5}/{segment_6}/{segment_7}/{segment_8}',function(){});
+
+			</script>
+
+		{/exp:profile:view}
+
+	{if:else}
+
+		<iframe id="pixfizzLogout" src="{pixfizz_url}/site/logout_check" width="0" height="0" marginheight="0" marginwidth="0" frameborder="0" seemless></iframe>
+
+	{/if}
+
+<div align="center">
+
+	<!-- LOGIN -->
+	{embed="global/login"}
+
+	<!-- HEADER -->
+	{embed="global/header"}
+
+	<!-- CONTENT -->
+	<div class="canvas">
+
+		{exp:channel:categories show="{segment_3}" dynamic="off" limit="1" style="linear"}
+			{embed="global/title" title="{category_name}"}
+		{/exp:channel:categories}
+
+		<div class="container">
+
+			<!-- PRINT -->
+			{if segment_2 == "prints"}
+
+				{embed="detail/nav"
+
+					cat_1 = "{section_01}" path_1 = "categories/1"
+					cat_2 = "{segment_3}" path_2 = "{segment_2}/{segment_3}/{group_print}"
+
+				}
+				{embed="detail/zoom"
+
+					cat_1 = "{cat_print_collection}" cat_1_all = "{cat_print_collection_all}"
+					cat_2 = "{cat_print_size}" cat_2_all = "{cat_print_size_all}"
+					cat_3 = "{cat_print_type}" cat_3_all = "{cat_print_type_all}"
+
+				}
+
+			<!-- CARD -->
+			{if:elseif segment_2 == "cards"}
+
+				{embed="detail/nav"
+
+					cat_1 = "{section_02}" path_1 = "categories/2"
+					cat_2 = "{segment_3}" path_2 = "{segment_2}/{segment_3}/{group_card}"
+
+				}
+				{embed="detail/zoom" 
+
+					cat_1 = "{cat_card_collection}" cat_1_all = "{cat_card_collection_all}"
+					cat_2 = "{cat_card_size}" cat_2_all = "{cat_card_size_all}"
+					cat_3 = "{cat_card_type}" cat_3_all = "{cat_card_type_all}"
+
+				}
+
+			<!-- STATIONARY -->
+			{if:elseif segment_2 == "stationery"}
+				{embed="detail/nav"
+
+					cat_1 = "{section_02}" path_1 = "categories/2"
+					cat_2 = "{segment_3}" path_2 = "{segment_2}/{segment_3}/{group_stationery}"
+
+				}
+				{embed="detail/zoom"
+
+					cat_1 = "{cat_stationery_collection}" cat_1_all = "{cat_stationery_collection_all}"
+					cat_2 = "{cat_stationery_size}" cat_2_all = "{cat_stationery_size_all}"
+					cat_3 = "{cat_stationery_type}" cat_3_all = "{cat_stationery_type_all}"
+
+				}
+
+			<!-- CANVAS -->
+			{if:elseif segment_2 == "canvas"}
+				{embed="detail/nav"
+
+					cat_1 = "{section_03}" path_1 = "categories/3"
+					cat_2 = "{segment_6}" path_2 = "{segment_2}/{segment_3}/{cat_canvas_collection_all}/{cat_canvas_size_all}/{segment_6}/{cat_orientation_all}"
+
+				}
+				{embed="detail/zoom"
+
+					cat_1 = "{cat_canvas_collection}" cat_1_all = "{cat_canvas_collection_all}"
+					cat_2 = "{cat_canvas_size}" cat_2_all = "{cat_canvas_size_all}"
+					cat_3 = "{cat_canvas_type}" cat_3_all = "{cat_canvas_type_all}"
+
+				}
+
+			<!-- METAL -->
+			{if:elseif segment_2 == "metal"}
+				{embed="detail/nav"
+
+					cat_1 = "{section_03}" path_1 = "categories/3"
+					cat_2 = "{segment_6}" path_2 = "{segment_2}/{segment_3}/{cat_metal_collection_all}/{cat_metal_size_all}/{segment_6}/{cat_orientation_all}"
+
+				}
+				{embed="detail/zoom"
+					
+					cat_1 = "{cat_metal_collection}" cat_1_all = "{cat_metal_collection_all}"
+					cat_2 = "{cat_metal_size}" cat_2_all = "{cat_metal_size_all}"
+					cat_3 = "{cat_metal_type}" cat_3_all = "{cat_metal_type_all}"
+
+				}
+
+			<!-- FRAME -->
+			{if:elseif segment_2 == "framed"}
+				{embed="detail/nav"
+
+					cat_1 = "{section_03}" path_1 = "categories/3"
+					cat_2 = "{segment_6}" path_2 = "{segment_2}/{segment_3}/{cat_frame_collection_all}/{cat_frame_size_all}/{segment_6}/{cat_orientation_all}"
+
+				}
+				{embed="detail/zoom"
+
+					cat_1 = "{cat_frame_collection}" cat_1_all = "{cat_frame_collection_all}"
+					cat_2 = "{cat_frame_size}" cat_2_all = "{cat_frame_size_all}"
+					cat_3 = "{cat_frame_type}" cat_3_all = "{cat_frame_type_all}"
+
+				}
+
+			<!-- GALLERY -->
+			{if:elseif segment_2 == "gallery"}
+				{embed="detail/nav"
+
+					cat_1 = "{section_03}" path_1 = "categories/3"
+					cat_2 = "{segment_6}" path_2 = "{segment_2}/{segment_3}/{cat_gallery_collection_all}/{cat_gallery_size_all}/{segment_6}/{cat_orientation_all}"
+
+				}
+				{embed="detail/zoom"
+
+					cat_1 = "{cat_gallery_collection}" cat_1_all = "{cat_gallery_collection_all}"
+					cat_2 = "{cat_gallery_size}" cat_2_all = "{cat_gallery_size_all}"
+					cat_3 = "{cat_gallery_type}" cat_3_all = "{cat_gallery_type_all}"
+
+				}
+
+			<!-- BOOK -->
+			{if:elseif segment_2 == "books"}
+				{embed="detail/nav"
+
+					cat_1 = "{section_04}" path_1 = "categories/4"
+					cat_2 = "{segment_3}" path_2 = "{segment_2}/{segment_3}/{group_book}"
+
+				}
+				{embed="detail/zoom"
+
+					cat_1 = "{cat_book_collection}" cat_1_all = "{cat_book_collection_all}"
+					cat_2 = "{cat_book_size}" cat_2_all = "{cat_book_size_all}"
+					cat_3 = "{cat_book_type}" cat_3_all = "{cat_book_type_all}"
+
+				}
+
+			<!-- GIFT -->
+			{if:elseif segment_2 == "gifts"}
+				{embed="detail/nav"
+
+					cat_1 = "{section_05}" path_1 = "categories/5"
+					cat_2 = "{segment_3}" path_2 = "{segment_2}/{segment_3}/{group_gift}"
+
+				}
+				{embed="detail/zoom"
+
+					cat_1 = "{cat_gift_collection}" cat_1_all = "{cat_gift_collection_all}"
+					cat_2 = "" cat_2_all = ""
+					cat_3 = "{cat_gift_type}" cat_3_all = "{cat_gift_type_all}"
+
+				}
+
+			<!-- CLASS -->
+			{if:elseif segment_2 == "classes"}
+				{embed="detail/nav"
+
+					cat_1 = "{section_06}" path_1 = "categories/6"
+					cat_2 = "{segment_3}" path_2 = "{segment_2}/{segment_3}/{group_class}"
+
+				}
+				{embed="detail/zoom"
+
+					cat_1 = "{cat_class_category}" cat_1_all = "{cat_class_category_all}"
+					cat_2 = "{cat_class_level}" cat_2_all = "{cat_class_level_all}"
+					cat_3 = "{cat_class_equipment}" cat_3_all = "{cat_class_equipment_all}"
+
+				}
+
+			<!-- MISC -->
+			{if:elseif segment_2 == "misc"}
+				{embed="detail/nav"
+
+					cat_1 = "" path_1 = ""
+					cat_2 = "" path_2 = ""
+
+				}
+				{embed="detail/zoom"
+
+					cat_1 = "" cat_1_all = ""
+					cat_2 = "" cat_2_all = ""
+					cat_3 = "" cat_3_all = ""
+
+				}
+
+			{/if}
+
+		</div>
+
+	</div>
+
+	<!-- FOOTER -->
+	{embed="global/footer"}
+
+	<!-- RECENT ITEMS -->
+	{embed="lightbox/index"}
+
+	<!-- MINI ZOOM -->
+	{embed="products/mini"}
+
+	<!-- VIDEO CONTENT -->
+	{embed="global/video_player"}
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<div>
+
+	<script type="text/javascript">
+
+		// Clear out any previous orders
+		for (var i in orders.order) delete orders.order[i];
+
+	</script>
+
+	{exp:channel:entries
+
+		channel = "order"
+		dynamic = "no"
+		status = "{order_status_process}"
+
+	}
+
+		<script>
+
+			orders.order['{entry_id}'] = {
+
+				 item: {}
+
+			};
+
+		</script>
+
+		<!-- POST FOR EACH ITEM -->
+		{exp:cartthrob:order_items
+
+			order_id = "{entry_id}"
+
+		}
+
+			<script>
+
+				orders.order['{entry_id}'].item['{item:count}'] = {
+
+					id: '{item:purchased_order_id}',
+					department: '{item:purchased_department}'
+
+				}
+
+			</script>
+
+		{/exp:cartthrob:order_items}
+
+		<!-- SAFECRACKER update order status to Processed -->
+		{exp:safecracker
+
+			name = "updateOrderStatus_{entry_id}"
+			channel = "order"
+			entry_id = "{entry_id}"
+
+		}
+
+			<!-- PAYMENT COMPLETE -->
+			{if status == 'Payment Complete'}
+
+				<input type="hidden" name="status" value="New Order">
+				<input type="hidden" name="order_payment_status" value="Paid">
+
+			<!-- PAYMENT PENDING -->
+			{if:elseif order_payment_status != 'Not Paid' && status == 'Payment Pending'}
+
+				<input type="hidden" name="status" value="New Order">
+				<input type="hidden" name="order_payment_status" value="Pending">
+
+			<!-- PAYMENT AT PICKUP -->
+			{if:else}
+
+				<input type="hidden" name="status" value="New Order">
+				<input type="hidden" name="order_payment_status" value="Not Paid">
+
+			{/if}
+
+			<!-- DEPARTMENTS CONTAINER -->
+			<div id="departments_{entry_id}"></div>
+
+		{/exp:safecracker}
+
+	{/exp:channel:entries}
+
+	<script type="text/javascript">
+
+		keychain.checkPixfizzLogin(keychain.userId,'{segment_1}',function(){
+
+			orders.processOrders(function(){});
+
+		});
+
+	</script>
+
+</div>

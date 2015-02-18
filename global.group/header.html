@@ -1,0 +1,82 @@
+<div class="container headerBox">
+
+	<div class="logo" onclick="javascript: toolbox.docLoc('{site_url}index.php');"></div>
+	<div class="header-session" align="center">
+
+		{if logged_in}
+
+			<div>
+
+				<div class="header-group-logout">
+					<div onclick="javascript: toolbox.docLoc('{pixfizz_url}/site/logout');">
+
+						<div class="header-txt-link visibilityLarge">Logout</div>
+						<div class="header-bg-logout"></div>
+
+					</div>
+				</div>
+
+				<div class="header-group-cart">
+					<div onclick="javascript: toolbox.docLoc('{site_url}index.php/store');">
+
+						<div class="header-txt-link visibilityLarge">Checkout</div>
+						<div class="header-bg-cart">
+							<div class="header-count" id="cartCount"></div>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="header-group-projects" id="savedProjects">
+					<div onclick="javascript: toolbox.docLoc('{site_url}index.php/account/projects');">
+
+						<div class="header-txt-link visibilityLarge">My Projects</div>
+						<div class="header-bg-projects">
+							<div class="header-count" id="projectCount"></div>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="header-group-user">
+
+					<div class="header-txt visibilityLarge">{exp:profile:view}{member_first_name}{/exp:profile:view}</div>
+					<div class="header-bg-user-active"></div>
+				</div>
+
+			</div>
+
+			<script type="text/javascript">
+
+				projects.getProjectsHeader('{exp:profile:view}{projects}','{ordered_projects}{/exp:profile:view}');
+				cart.getCartHeader({exp:cartthrob:unique_items_count});
+
+			</script>
+
+		{if:else}
+
+			<div>
+
+				<div class="header-group-user">
+					<div onclick="javascript: keychain.showLogin({
+
+								return_url: '{segment_1}/{segment_2}/{segment_3}/{segment_4}/{segment_5}/{segment_6}/{segment_7}/{segment_8}/{segment_9}'
+
+							});">
+
+						<div class="header-txt-link visibilityLarge">Login</div>
+						<div class="header-bg-user"></div>
+
+					</div>
+				</div>
+
+			</div>
+
+		{/if}
+
+	</div>
+
+</div>
+
+<!-- MAIN MENU -->
+{embed="global/menu"}

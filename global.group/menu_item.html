@@ -1,0 +1,35 @@
+{exp:channel:categories channel="categories" category_group="{embed:cat}" style="linear"}
+
+	{exp:channel:entries channel="landing_page" category="{category_id}" limit="1" dynamic="off" disable="pagination|category_fields|member_data"}
+
+		<script type="text/javascript">
+
+			mainmenu.section['section_{embed:cat}'].item['item_{category_id}'] = {
+
+				title: '{category_name}',
+				url: ''
+			}
+
+		</script>
+
+		{if landing_body != ""} <script type="text/javascript"> mainmenu.section['section_{embed:cat}'].item['item_{category_id}'].url = '{site_url}index.php/services/C{category_id}'; </script>
+		{if:elseif landing_url != ""} <script type="text/javascript"> mainmenu.section['section_{embed:cat}'].item['item_{category_id}'].url = '{landing_url}'; </script>
+
+		{if:elseif store_type != "-"}
+
+			{if store_type == "print"} <script type="text/javascript"> mainmenu.section['section_{embed:cat}'].item['item_{category_id}'].url = '{site_url}index.php/prints/{category_id}/{group_print}'; </script>
+			{if:elseif store_type == "card"} <script type="text/javascript"> mainmenu.section['section_{embed:cat}'].item['item_{category_id}'].url = '{site_url}index.php/cards/{category_id}/{group_card}'; </script>
+			{if:elseif store_type == "stationery"} <script type="text/javascript"> mainmenu.section['section_{embed:cat}'].item['item_{category_id}'].url = '{site_url}index.php/stationery/{category_id}/{group_stationery}'; </script>
+			{if:elseif store_type == "canvas"} <script type="text/javascript"> mainmenu.section['section_{embed:cat}'].item['item_{category_id}'].url = '{site_url}index.php/canvas/{category_id}/{group_canvas}'; </script>
+			{if:elseif store_type == "metal"} <script type="text/javascript"> mainmenu.section['section_{embed:cat}'].item['item_{category_id}'].url = '{site_url}index.php/metal/{category_id}/{group_metal}'; </script>
+			{if:elseif store_type == "frame"} <script type="text/javascript"> mainmenu.section['section_{embed:cat}'].item['item_{category_id}'].url = '{site_url}index.php/framed/{category_id}/{group_frame}'; </script>
+			{if:elseif store_type == "gallery"} <script type="text/javascript"> mainmenu.section['section_{embed:cat}'].item['item_{category_id}'].url = '{site_url}index.php/gallery/{category_id}/{group_gallery}'; </script>
+			{if:elseif store_type == "book"} <script type="text/javascript"> mainmenu.section['section_{embed:cat}'].item['item_{category_id}'].url = '{site_url}index.php/books/{category_id}/{group_book}'; </script>
+			{if:elseif store_type == "gift"} <script type="text/javascript"> mainmenu.section['section_{embed:cat}'].item['item_{category_id}'].url = '{site_url}index.php/gifts/{category_id}/{group_gift}'; </script>
+			{if:elseif store_type == "class"} <script type="text/javascript"> mainmenu.section['section_{embed:cat}'].item['item_{category_id}'].url = '{site_url}index.php/classes/{category_id}/{group_class}'; </script> {/if}
+
+		{/if}
+
+	{/exp:channel:entries}
+
+{/exp:channel:categories}

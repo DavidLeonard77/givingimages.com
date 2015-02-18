@@ -1,0 +1,16 @@
+{exp:channel:entries channel="{embed:channel}" dynamic="off"}
+
+	<div class="block-spacer">
+		<div class="block-bg thumb"
+			 style="background-image: url('{store_promotion_thumb:tile}');"
+			 onclick="javascript: toolbox.docLoc('/index.php/promotions/{url_title}');"></div>
+		<div class="block-button majorButton">{title}</div>
+	</div>
+
+	{if no_results}
+
+		{embed="promotions/no_results"}
+
+	{/if}
+
+{/exp:channel:entries}

@@ -1,0 +1,122 @@
+<div class="header strong">Order Summary</div>
+
+<!-- SHOW ITEMS -->	
+{exp:cartthrob:update_cart_form
+
+	id = "update_cart_form"
+	return = "store"
+
+}
+
+	{exp:cartthrob:cart_items_info}
+
+		<div class="itemDivider"></div>
+
+		<script type="text/javascript">
+
+			cart.cartDiscount = toolbox.floatPrice('{exp:cartthrob:cart_discount}');
+			cart.cartTotal = toolbox.preciseRound(toolbox.floatPrice('{exp:cartthrob:cart_subtotal}'),2);
+
+		</script>
+
+		<!-- ORDER SUMMARY -->
+		<div class="cart-summarySpacer">
+
+			<!-- ITEM IMAGE -->
+			<div>
+
+				<div class="cart-thumbSpacer">
+					<div id="previewImage_{row_id}" class="thumb"></div>
+					<div id="previewEdit_{row_id}"></div>
+				</div>
+
+			</div>
+
+			<div>
+				<div align="left">
+
+					<!-- TITLE -->
+					<div id="previewName_{row_id}"></div>
+						
+					<script type="text/javascript" language="javascript">
+
+						cart.row['{row_id}'] = {
+
+							entry_id: '{entry_id}',
+							book_id: '{item_options:purchased_order_id}',
+							theme_id: '{theme_id}',
+							product_code: '{title}',
+							ee_preview_url: '{preview_image_1:small}',
+							return_url: '{segment_1}/{segment_2}'
+
+						}
+
+					</script>
+					<br>
+
+					<div>
+
+						{if quantity > 1}Quantity&nbsp;&nbsp;<span class="strong">{quantity}</span><br>{/if}<br>
+
+					</div>
+
+					<!-- OPTIONS -->
+					<div align="left">
+
+						<div id="selected_attributes_{row_id}"></div>
+
+						{exp:cartthrob:item_options row_id="{row_id}"}
+
+							{options}
+
+								{if option_field == "purchased_attributes"}
+
+									<script type="text/javascript">
+
+										cart.formatAttributes('{option_name}','{row_id}');
+
+									</script>
+
+								{/if}
+
+								{if option_field == "purchased_custom_imprinting"}
+
+									<div class="cart-attributePreviewSpacer">
+										<div class="optionItemBox">
+				 							Return Address Imprinting, use<br>
+				 							<span class="strong">{option_name}</span>
+				 						</div>
+									</div>
+
+								{/if}
+
+							{/options}
+
+						{/exp:cartthrob:item_options}
+
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+
+		<!-- END CART ITEM ROW -->
+		{if last_row}
+
+			<script type="text/javascript">
+
+				keychain.checkPixfizzLogin(keychain.userId,'{segment_1}/{segment_2}/{segment_3}',function(){
+
+					// Get the cart data
+					cart.fetchItems();
+
+				});
+
+			</script>
+
+		{/if}
+
+	{/exp:cartthrob:cart_items_info}
+		
+{/exp:cartthrob:update_cart_form}

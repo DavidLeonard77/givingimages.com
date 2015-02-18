@@ -1,0 +1,18 @@
+{if segment_3 == "favorites"}
+	{exp:remember_me:remove list="{segment_3}"}
+
+	<script type="text/javascript" language="javascript">
+		lightbox.refreshLightbox('{segment_3}');
+		lightbox.refreshLightbox('recents');
+	</script>
+
+{if:elseif segment_3 == "recents"}
+	{exp:remember_me:clear}
+
+	<script type="text/javascript" language="javascript">
+		lightbox.refreshLightbox('{segment_3}');
+		lightbox.refreshLightbox('favorites');
+	</script>
+{/if}
+
+<script type="text/javascript" language="javascript"> lightbox.hideLightbox(); </script>

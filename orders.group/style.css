@@ -1,0 +1,502 @@
+@charset "UTF-8";
+/* CSS Document */
+
+/* -------------------------------  ORDERS -------------------------------------------- */
+
+.large {
+	font-size: 28px;
+}
+.medium {
+	font-size: 18px;
+}
+
+.titleSpacer,
+.detailOrderSpacer > div,
+.statusSpacer,
+[class*="orderRow-"] {
+	width: 1004px;
+}
+
+.pagination {
+	padding: 9px 0 20px 0;
+}
+.pagination > div {
+	display: table-cell;
+}
+.pagination-first {
+	padding-right: 2px;
+}
+.pagination-nav {
+	padding: 0 2px;
+}
+.pagination-last {
+	padding-left: 2px;
+}
+
+.pagination-current {
+	background-color: #636363;
+	color: #fff;
+}
+.pagination-spacer {
+	width: 4px;
+}
+
+.titleSpacer {
+	display: table;
+	padding-top: 40px;
+	height: 0;
+}
+.titleSpacer > div:first-child {
+	float: left;
+}
+.titleSpacer > div:last-child {
+	float: right;
+}
+.titleSpacer div.title {
+	text-align: left;
+	padding-bottom: 10px;
+	padding: 0;
+}
+
+.detailOrderSpacer > div {
+	display: table;
+}
+
+#orderIdField {
+	width: 120px;
+}
+
+.departmentSpacer > div {
+	float: right;
+}
+.departmentSpacer div.smallButton {
+	margin: 8px 0 8px 8px;
+}
+
+.statusSpacer {
+	display: table;
+}
+.statusSpacer > div {
+	float: right;
+}
+.statusSpacer > div:first-child {
+	padding: 8px 0 0 8px;
+}
+.statusSpacer > div:nth-child(2) {
+	padding: 8px 0 0 16px;
+}
+
+.departmentButton,
+.statusButton {
+	margin: 8px 0 8px 8px;
+	padding: 6px 8px;
+	font-size: 13px;
+	font-weight: 700;
+	color: #fff;
+	cursor: pointer;
+}
+
+.buttonHover {
+	opacity: 0.5;
+}
+.buttonHover:hover {
+	opacity: 1;
+}
+
+[class*="orderRow-"] {
+	overflow: hidden;
+	margin-bottom: 20px;
+	box-shadow: 0 0 4px #ccc;
+}
+.orderRow-order {
+	height: 28px;
+	margin-bottom: 8px;
+}
+.orderRow-order:first-child,
+.orderRow-detail,
+.orderRow-loading {
+	margin-top: 40px;
+}
+.orderRow-loading {
+	height: 32px;
+	box-shadow: 0 0 0;
+}
+.orderRow-detail > div:first-child {
+	width: 322px;
+	padding: 0 12px;
+}
+.orderRow-detail > div:nth-child(2) {
+	width: 280px;
+	padding: 12px;
+}
+.orderRow-detail > div:last-child {
+	width: 326px;
+	padding: 12px;
+}
+
+[class*="rowCell-"] {
+	display: table-cell;
+	vertical-align: top;
+	padding: 4px;
+}
+.rowCell-delivery {
+	width: 240px;
+	height: 28px;
+	padding: 4px 8px;
+}
+.rowCell-delivery > div {
+	display: table;
+	width: 220px;
+	height: 28px;
+	line-height: 20px;
+	overflow: hidden;
+}
+.rowCell-payment {
+	width: 76px;
+	height: 28px;
+	overflow: hidden;
+	padding: 6px 12px;
+	background-color: #fff;
+}
+.rowCell-order {
+	font-weight: 700;
+	color: #fff;
+	cursor: pointer;
+	width: 162px;
+	height: 28px;
+	padding: 6px 14px;
+}
+.rowCell-detailHeader > div {
+	display: table;
+	width: 322px;
+}
+
+.rowCell-detailHeader > div:nth-child(3),
+.rowCell-detailHeader > div:nth-child(4) {
+	padding: 16px 0;
+}
+.rowCell-detailHeader > div:nth-child(3),
+.rowCell-detailHeader > div:nth-child(4),
+.rowCell-detailHeader > div:last-child {
+	padding-bottom: 4px;
+	width: auto;
+}
+.rowCell-detailHeader > div:nth-child(3),
+.rowCell-detailHeader > div:last-child {
+	width: 240px;
+}
+.rowCell-detailHeader > div:nth-child(4) {
+	padding: 115px 0 8px 0;
+}
+
+.rowCell-detailBody > div {
+	display: table;
+}
+.rowCell-detailBody > div:nth-child(2),
+.rowCell-detailBody > div:first-child {
+	padding-bottom: 12px;
+}
+
+.rowCell-detailFooter > div {
+	display: table;
+}
+
+.rowCell-itemHeader,
+.rowCell-itemHeader div,
+.rowCell-itemFooter {
+	width: 322px;
+}
+.rowCell-itemHeader {
+	padding: 12px;
+	background-color: #ddd;
+	color: #636363;
+}
+.rowCell-itemHeader div {
+	float: right;
+	text-align: right;
+}
+.rowCell-itemHeader > div {
+	display: table;
+}
+.rowCell-itemHeader a {
+	color: #636363;
+	text-decoration: none;
+}
+.rowCell-itemHeader a:hover {
+	color: #b5bf1e;
+	text-decoration: underline;
+}
+.rowCell-itemBody {
+	width: 298px;
+	padding: 12px;
+}
+.rowCell-itemBody > div {
+	padding: 4px 0;
+}
+.rowCell-itemFooter {
+	padding: 14px 14px 14px 0px;
+}
+
+.fileInfo {
+	display: table;
+}
+.fileInfo > div {
+	display: table;
+	height: 50px;
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.fileInfo > div:first-child {
+	color: #fff;
+	font-size: 22px;
+	text-align: center;
+	text-transform: uppercase;
+	width: 50px;
+}
+.fileInfo > div:nth-child(2){
+	background-color: #f9f9f9;
+	padding: 0 8px;
+	text-align: left;
+}
+.fileInfo a {
+	text-decoration: none;
+	color: #636363;
+}
+.fileInfo a:hover {
+	color: #5cacde;
+}
+
+.departmentsSpacer > div:first-child {
+	padding: 16px 0 50px 0;
+}
+
+.paymentStatusItem,
+.departmentsItem {
+	display: table;
+}
+.departmentsItem > div:first-child,
+.departmentsItem > div:last-child {
+	float: left;
+	padding: 2px 0 2px 11px;
+}
+.departmentsItem > div:first-child {
+	padding: 6px 0 0 0;
+}
+
+.paymentStatusItem > div:last-child,
+.paymentStatusItem > div:first-child {
+	float: left;
+	padding: 0 0 6px 0;
+}
+.paymentStatusItem > div:last-child {
+	padding: 3px 0 2px 11px;
+}
+
+[class*="orderHeader-"] {
+	background-color: #636363;
+	color: #fff;}
+
+[class*="orderHeader-"] a {
+	color: #fff;
+	text-decoration: none;
+}
+[class*="orderHeader-"] a:hover {
+	cursor: pointer;
+	color: #b5bf1e;
+}
+
+.orderHeader-order {
+	height: 28px;
+	padding: 4px 8px;
+}
+.orderHeader-order > div {
+	display: table;
+	width: 442px;
+}
+
+.detailHeaderSpacer {
+	padding-top: 12px;
+}
+.detailHeaderSpacer > div:first-child {
+	float: left;
+	text-align: left;
+}
+
+.detailHeaderSpacer > div:last-child {
+	float: right;
+	text-align: right;
+	font-weight: 300;
+}
+
+.detailHeaderAddress > div {
+	float: left;
+	text-align: left;
+}
+
+.detailPickupLocation {
+	display: table;
+	margin-bottom: 8px;
+}
+.detailPickupLocation > div {
+	float: left;
+}
+.detailPickupLocation > div:last-child {
+	padding-right: 8px;
+}
+.detailPickupLocation input {
+	margin-top: 4px;
+	text-align: left;
+}
+.detailPickupLocation input:first-child {
+	width: 50px;
+}
+.detailPickupLocation input:last-child {
+	width: 202px;
+}
+
+.detailNotes > div {
+	display: table;
+	margin-bottom: 8px;
+}
+.detailNotes > div:last-child {
+	margin-bottom: 0;
+}
+.detailNotes textarea {
+	height: auto;
+	width: 280px;
+	text-align: left;
+	margin-top: 4px;
+}
+.detailNotes input {
+	margin: 12px 0 8px 0;
+	padding-top: 0px;
+	height: 30px;
+}
+
+.statusBox {
+	margin-bottom: 12px;
+	padding: 4px 8px;
+	color: #fff;
+	font-size: 28px;
+	font-weight: 300;
+}
+
+.detailStatus {
+	display: table;
+}
+.detailStatus > div {
+	float: right;
+}
+.detailStatus input {
+	height: 30px;
+}
+
+[class*="orderIcn-"] {
+	opacity: 0.63;
+	cursor: pointer;
+	float: left;
+}
+[class*="orderIcn-"]:hover {
+	opacity: 1;
+}
+.orderIcn-header {
+	padding: 6px 0 0 16px;
+}
+.orderIcn-item {
+	float: right;
+}
+
+.orderRowDetails {
+	float: left;
+	text-align: left;
+	padding: 2px 0 0 16px;
+}
+.orderRowName {
+	padding-top: 2px;
+	float: right;
+}
+
+.color-green {
+	color: #9ebd3d;
+}
+.color-turquoise {
+	color: #4889A2;
+}
+
+.bgcolor-green {
+	background-color: #9ebd3d;
+}
+.bgcolor-teal {
+	background-color: #318767;
+}
+.bgcolor-red {
+	background-color: #BD1150;
+}
+.bgcolor-darkGrey {
+	background-color: #636363;
+}
+.bgcolor-lightGrey {
+	background-color: #AAAAAA;
+}
+.bgcolor-navy {
+	background-color: #1C6799;
+}
+.bgcolor-turquoise {
+	background-color: #4889A2;
+}
+.bgcolor-darkNavy {
+	background-color: #00525E;
+}
+
+.noOrdersSpacer {
+	padding: 28px 0 20px 0;
+	text-align: center;
+}
+
+.paymentStatus > div {
+	float: right;
+	text-align: right;
+	padding: 7px 0 4px 4px;
+}
+.paymentStatus > div:first-child {
+	padding-left: 12px;
+}
+.paymentStatus > div.color-green,
+.paymentStatus > div.color-turquoise {
+	font-size: 24px;
+}
+
+.paymentUpdate {
+	float: left;
+}
+.paymentStatus {
+	float: right;
+	width: auto;
+}
+
+.itemRow {
+	overflow: hidden;
+	box-shadow: 0 0 4px #ccc;
+	margin-bottom: 20px;
+	background-color: #fff;
+}
+
+.departmentInactive {
+	background-color: #636363;
+	color: #fff;
+}
+
+.departmentActive {
+	background-color: #fff;
+	color: #636363;
+	box-shadow: 0 0 4px #ccc;
+}
+
+.smallButton {
+	background-color: #f9f9f9;
+}
+
+.processInfo {
+	padding: 32px 0 0 0;
+}

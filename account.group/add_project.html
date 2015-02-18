@@ -1,0 +1,92 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
+<head>
+	{embed="global/stage" title=""}
+</head>
+
+<!-- BODY -->
+<body>
+
+	{if logged_in}
+
+		{embed="global/wait_msg"
+
+			msg = "Please wait while we load your projects" 
+
+		}
+
+		{exp:profile:edit
+
+			id = "addToProjects"
+			return = "account/projects"
+
+		}
+
+			<input type="hidden" id="projects" name="projects" value="{projects}">
+
+			<!-- If book id was returned using SOP -->
+			{if segment_3 != ""}
+				<script type="text/javascript">
+
+					projects.projectItems = projects.scrubString('{projects}');
+					
+					projects.saveProject('{segment_3}',projects.projectItems);
+
+				</script>
+
+			<!-- If first time here -->
+			{if:else}
+				<script type="text/javascript">
+
+					keychain.userId = '{pixfizz_user_id}';
+
+					projects.projectItems = projects.scrubString('{projects}');
+
+					// Get book id using CORS
+					projects.getLastBook(keychain.userId,function(){
+
+						// Error - Go back to projects
+						toolbox.docLoc('{site_url}index.php/account/projects');
+
+					},function(bookId){
+
+						projects.itemCheck(bookId,projects.projectItems,function(){
+
+							// Not an existing project
+							projects.saveProject(bookId,projects.projectItems);
+
+						},function(){
+
+							// Already exists
+							toolbox.docLoc('{site_url}index.php/account/projects');
+
+						});
+						
+					});
+
+				</script>
+			{/if}
+
+		{/exp:profile:edit}
+
+
+	<!-- Get them to log-in -->
+	{if:else}
+
+		{embed="global/login"
+
+			forced = "true"
+			abort = "{site_url}"
+			alert = "{login_message_forced}"
+			return = "{segment_1}/{segment_2}/{segment_3}"
+
+		}
+
+	{/if}
+
+</body>
+</html>

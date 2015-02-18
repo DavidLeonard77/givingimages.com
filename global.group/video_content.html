@@ -1,0 +1,9 @@
+<div class="overlayClose visibilityLarge zero">
+	<div onclick="javascript: video.hide();">x</div>
+</div>
+
+{exp:channel:entries channel="video_content" entry_id="{segment_3}" dynamic="off" limit="1" disable="pagination|member_data"}
+	<iframe class="visibilityLarge" id="videoPlayerFrame" src="http://player.vimeo.com/video/{vimeo_id}" width="960" height="540" frameborder="0" webkitallowfullScreen mozallowfullscreen allowfullScreen seemless></iframe>
+{/exp:channel:entries}
+
+<script type="text/javascript" language="javascript"> video.loaded(); </script>

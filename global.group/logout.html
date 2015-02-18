@@ -1,0 +1,22 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
+<head>
+	{embed="global/stage" title=""}
+</head>
+<body>
+
+	<!-- Logout -->
+	{if logged_in}
+		<script type="text/javascript"> toolbox.docLoc("{path='logout'}"); </script>
+
+	<!-- You're already logged out -->
+	{if:else}
+		<script type="text/javascript"> toolbox.docLoc("{site_url}index.php"); </script>
+	{/if}
+
+</body>
+</html>

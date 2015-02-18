@@ -1,0 +1,139 @@
+<page>
+
+	{exp:channel:entries
+
+		channel = "{embed:channel}"
+		category = "{segment_3}&{segment_4}&{segment_5}&{segment_6}&{segment_7}"
+		paginate = "bottom"
+		limit = "12"
+		paginate_base = "{segment_1}/{segment_2}/{segment_3}/{segment_4}/{segment_5}/{segment_6}/{segment_7}/{segment_8}"
+		status = "{status_product}"
+		dynamic = "off"
+		offset = "{segment_8}"
+		disable = "category_fields|member_data"
+		orderby = "status|product_price|date"
+		sort = "asc|asc"
+
+	}
+
+		{if no_results}
+			<script type="text/javascript">
+
+				iscroll.dataPresent = false;
+
+			</script>
+		{/if}
+
+		<script type="text/javascript">
+
+			cart.row['{entry_id}'] = {
+
+				entry_id: '{entry_id}',
+				pricing_status: '',
+				price: toolbox.floatPrice('{product_price}'),
+				price_override: '',
+				pricing_model: {},
+				quantity_min: 1,
+				quantity_set: 1,
+				field: {}
+
+			}
+
+		</script>
+
+		<div class="thumbSpacer">
+
+			<!-- QUANTITY -->
+			<input id="product_quantity_{entry_id}" type="hidden" value="1">
+
+			<!-- PRICING DESCRIPTION -->
+			{categories}
+
+				{embed="products/pricing"
+
+					category = "{category_id}"
+					entry_id = "{entry_id}"
+
+				}
+
+			{/categories}
+
+			<div class="thumb" onclick="javascript: toolbox.docLoc('{site_url}index.php/detail/{segment_2}/{segment_3}/{segment_4}/{segment_5}/{segment_6}/{segment_7}/{entry_id}');">
+
+				<div class="thumb-bg-preview" style="background-image: url('{preview_image_1:small}');"></div>
+				<div class="thumbTxt">
+
+					{if embed:channel == "class"}
+						<div>{title}</div>
+						<div>{product_short_desc}</div>
+
+					{if:else}
+						<div>
+							{categories limit="1" show_group="{embed:cat_2}" show="not {embed:cat_2_all}"}{category_name}{/categories}
+							{categories limit="1" show_group="{embed:cat_3}" show="not {embed:cat_3_all}"}{category_name}{/categories}
+						</div>
+
+						<div>{product_short_desc}</div>
+						<div>{categories limit="1" show_group="{embed:cat_1}" show="not {embed:cat_1_all}"}{category_name}{/categories}</div>
+					{/if}
+
+					<!-- PRICE -->
+					<div id="product_price_{entry_id}"></div>
+
+				</div>
+
+			</div>
+
+			<div class="thumbFlare">
+
+				<!-- STATUS FLAGS -->
+				<div class="thumbFlagSpacer" id="product_flag_{entry_id}">
+
+					{if status == "New"}
+						<div class="thumb-bg-flag-new"></div>
+					{if:elseif status == "Designer"}
+						<div class="thumb-bg-flag-designer"></div>
+					{if:elseif status == "Favorite"}
+						<div class="thumb-bg-flag-favorite"></div>
+					{if:elseif status == "Sale"}
+						<div class="thumb-bg-flag-sale"></div>
+					{/if}
+
+				</div>
+
+				<div class="thumbIconSpacer">
+
+					<div class="visibilityLarge thumb-bg-icon-zoom" onclick="javascript: zoom.show('{segment_2}/{segment_3}/{segment_4}/{segment_5}/{segment_6}/{segment_7}/{entry_id}');"></div>
+					<div class="visibilityLarge thumb-bg-icon-favorite"
+
+						{if logged_in} onclick="javascript: lightbox.addItems('{entry_id}','favorites');"
+						{if:else} onclick="javascript: keychain.showLogin({
+
+							return_url: '{segment_2}/{segment_3}/{segment_4}/{segment_5}/{segment_6}/{segment_7}'
+
+						});"{/if}></div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+		{paginate}{pagination_links}{/pagination_links}{/paginate}
+
+		<script type="text/javascript">
+
+			cart.updatePriceDetails('{entry_id}');
+
+		</script>
+
+	{/exp:channel:entries}
+
+</page>
+
+<script type="text/javascript">
+
+	iscroll.resetHeight('#content_{segment_8}');
+	$(document).find('script').remove();
+
+</script>

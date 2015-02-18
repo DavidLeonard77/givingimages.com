@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>{site_name} Members CSV</title>
+
+</head>
+
+<!-- BODY -->
+<body>
+
+{if group_id == "1"}
+
+Pixfizz User Id,Email,Phone,First Name,Last Name,
+Billing Address,Billing Address2,Billing City,Billing State,Billing Zip,
+Shipping Address,Shipping Address2,Shipping City,Shipping State,Shipping Zip<br>
+<br>
+
+{exp:query sql="SELECT member_id FROM exp_members WHERE group_id = '{segment_5}' LIMIT {segment_3} OFFSET {segment_4}"}
+	{exp:profile:view member_id="{member_id}"}{pixfizz_user_id},{title},{member_phone},{member_first_name},{member_last_name},
+		{member_address},{member_address2},{member_city},{member_state},{member_zip},
+		{member_shipping_address},{member_shipping_address2},{member_shipping_city},{member_shipping_state},{member_shipping_zip}<br>{/exp:profile:view}
+{/exp:query}
+
+
+{/if}
+</body>
+</html>

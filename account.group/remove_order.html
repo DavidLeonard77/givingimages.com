@@ -1,0 +1,59 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
+<head>
+	{embed="global/stage" title=""}
+</head>
+
+<!-- BODY -->
+<body>
+
+	{if logged_in}
+
+		{embed="global/wait_msg"
+
+			msg = "Please wait while we load your projects" 
+
+		}
+
+		<!-- Save the book_id to the user account -->
+		{exp:profile:edit
+
+			id = "moveFromProjects"
+			return = "account/projects"
+
+		}
+
+			<input type="hidden" id="ordered_projects" name="ordered_projects" value="{ordered_projects}">
+			<input type="hidden" id="deleted_projects" name="deleted_projects" value="{deleted_projects}">
+
+			<script type="text/javascript">
+
+				projects.orderedItems = projects.scrubString('{ordered_projects}');
+				projects.deletedItems = projects.scrubString('{deleted_projects}');
+				
+				projects.moveProjects('{segment_3}',projects.orderedItems,projects.deletedItems,'#ordered_projects','#deleted_projects');
+
+			</script>
+
+		{/exp:profile:edit}
+
+	<!-- Get them to log-in -->
+	{if:else}
+
+		{embed="global/login"
+
+			forced = "true"
+			abort = "{site_url}"
+			alert = "undefined"
+			return = "{segment_1}/{segment_2}/{segment_3}"
+
+		}
+
+	{/if}
+
+</body>
+</html>

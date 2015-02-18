@@ -1,0 +1,77 @@
+<head>
+	{embed="global/stage" title="&nbsp;checkout"}
+
+</head>
+
+<!-- BODY -->
+<body>
+
+	{if segment_3 != "done"}
+
+		{exp:channel:entries
+
+			channel = "order"
+			entry_id = "{segment_3}"
+			dynamic = "no"
+			status = "Payment Complete|Payment Processing"
+
+		}
+
+			{exp:cartthrob:order_items
+
+				order_id = "{entry_id}"
+
+			}
+
+				<script type="text/javascript">
+
+					cart.thisBook = '{item:purchased_order_id}';
+					cart.coupon['{order_coupon}'] = { title: '{order_coupon}' };
+					cart.productCheck(cart.thisBook,function(){
+
+						// EE Product - Do nothing
+
+					},function(){
+
+						// Pixfizz Product - Add to the list
+						cart.cartItems = projects.addItem(cart.thisBook,cart.cartItems);
+
+					});
+
+				</script>
+
+			{/exp:cartthrob:order_items}
+
+		{/exp:channel:entries}
+
+		<!-- Moves the book id to ordered projects -->
+		{exp:profile:edit
+
+			id = "moveFromProjects"
+			return = "account/disable_project/done"
+
+		}
+
+			<input type="hidden" id="coupons" name="coupons" value="{coupons}">
+			<input type="hidden" id="projects" name="projects" value="{projects}">
+			<input type="hidden" id="ordered_projects" name="ordered_projects" value="{ordered_projects}">
+
+			<script type="text/javascript">
+
+				cart.saveCoupon('#coupons');
+
+				projects.projectItems = projects.scrubString('{projects}');
+				projects.orderedItems = projects.scrubString('{ordered_projects}');
+				cart.cartItems = projects.scrubString(cart.cartItems);
+
+				projects.moveProjects(cart.cartItems,projects.projectItems,projects.orderedItems,'#projects','#ordered_projects');
+
+			</script>
+
+		{/exp:profile:edit}
+
+	{/if}
+
+</body>
+
+</html>

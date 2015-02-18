@@ -1,0 +1,45 @@
+{exp:channel:entries
+
+	channel = "product_pricing"
+	dynamic = "no"
+	category = "{embed:category}"
+	status = "{status_price}"
+	disable = "pagination|member_data"
+	limit = "1"
+
+}
+
+	<script type="text/javascript">
+
+		cart.row['{embed:entry_id}'].price_override = '{product_price_override}';
+		cart.row['{embed:entry_id}'].quantity_min = cart.formatQuantity('{product_minimum_quantity}');
+		cart.row['{embed:entry_id}'].quantity_set = cart.formatQuantity('{product_set_quantity}');
+		cart.row['{embed:entry_id}'].pricing_status = '{status}';
+
+	</script>
+
+	{product_pricing_model}
+
+		<script type="text/javascript">
+
+			cart.row['{embed:entry_id}'].pricing_model['{option_value}'] = {
+
+				title: '{option_name}',
+				price: '{price}',
+				percent: '{percent}'
+
+			};
+
+			cart.row['{embed:entry_id}'].pricing_model['{option_value}'].price = toolbox.floatPrice(cart.getQuantityPrice('{embed:entry_id}','{option_value}'));
+
+		</script>
+
+	{/product_pricing_model}
+
+	<script type="text/javascript">
+
+		cart.row['{embed:entry_id}'].checked = true;
+
+	</script>
+
+{/exp:channel:entries}

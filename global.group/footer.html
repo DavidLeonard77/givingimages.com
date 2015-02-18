@@ -1,0 +1,91 @@
+<div id="footerBox" class="footerBox footerBoxClosed" align="center">
+
+	<div class="container">
+
+		<!-- Site Map -->
+		<div id="siteMap" class="visibilityLarge"></div>
+		<script type="text/javascript"> mainmenu.createSiteMap(); </script>
+
+		<div class="container" style="display: table;">
+
+			<div class="col-1-2">
+				{exp:channel:entries
+
+					channel = "store_contact"
+					dynamic = "off"
+					limit = "1"
+					sort = "asc"
+					disable = "pagination|category_fields|member_data"
+
+				}
+
+					<div class="col-1-4 contact">
+						Telephone<br>
+						{contact_tel}
+					</div>
+
+					<div class="col-1-4 contact">
+						eMail<br>
+						<a href="mailto: {contact_email}">{contact_email}</a>
+					</div>
+
+				{/exp:channel:entries}	
+			</div>
+
+			<div class="col-1-2">
+
+				<div class="col-1-1">
+					<div class="visibilityMedium social">
+						{exp:channel:entries
+
+							channel = "social_link"
+							dynamic = "off"
+							sort = "asc"
+							disable = "pagination|category_fields|member_data"
+
+						}
+
+							<div class="social-bg-icon" 
+								 style="background-image: url('{social_link_icon}/graphics/graphics/{file_name}{/social_link_icon}');"
+								 onclick="javascript: toolbox.docLoc('{social_link_address}');"></div>
+						
+						{/exp:channel:entries}
+					</div>
+				</div>
+
+				<div class="col-1-1">
+					<div class="visibilityMedium social">
+						{email_signup_form}
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<div class="container footerLinkBox">
+
+		<!-- Static contact link -->
+		<div class="footerLinkSpacer">
+			<a href="{site_url}index.php/services/contact" target="_top">Contact Us</a>
+		</div>
+
+		<!-- Landing Page entries -->
+		{exp:channel:categories channel="landing_page" category_group="{cat_footer_menu}" style="linear"}
+			{exp:channel:entries channel="landing_page" category_group="{cat_footer_menu}" category="{category_id}" dynamic="off" limit="1" disable="pagination|category_fields|member_data"}
+
+				<div class="footerLinkSpacer">
+					{if landing_url != ""}<a href="{landing_url}">{category_name}</a>
+					{if:else}<a href="{site_url}index.php/services/C{category_id}">{category_name}</a>{/if}
+				</div>
+
+			{/exp:channel:entries}
+		{/exp:channel:categories}
+
+		<div class="copyright">copyright &copy; {company_name}</div>
+
+	</div>
+
+</div>

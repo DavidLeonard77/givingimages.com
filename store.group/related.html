@@ -1,0 +1,272 @@
+<div class="container">Your product is ready!&nbsp;&nbsp;You may also like these</div>
+
+<div class="container relatedThumbSpacer">
+
+	{exp:channel:entries
+
+		entry_id = "{segment_3}"
+		fixed_order = "{segment_3}"
+		dynamic = "off"
+		status = "{status_product}"
+		disable = "pagination|member_data"
+		limit = "8"
+
+	}
+
+		<!-- PRINT -->
+		{categories show_group="{cat_print}" limit="1"}
+			{embed="detail/related_item"
+
+				entry_id = "{entry_id}"
+				product = "prints"
+				category_id = "{category_id}"
+				group = "{group_print}"
+				image = "{preview_image_1:small}"
+
+				cat_1 = "{cat_print_collection}"
+				cat_1_all = "{cat_print_collection_all}"
+				cat_2 = "{cat_print_size}"
+				cat_2_all = "{cat_print_size_all}"
+				cat_3 = "{cat_print_type}"
+				cat_3_all = "{cat_print_type_all}"
+				cat_4 = "{cat_orientation}"
+				cat_4_all = "{cat_orientation_all}"
+
+			}
+		{/categories}
+
+		<!-- CARD -->
+		{categories show_group="{cat_card}" show="not {cat_stationery}" limit="1"}
+			{embed="detail/related_item"
+
+				entry_id = "{entry_id}"
+				product = "cards"
+				category_id = "{category_id}"
+				group = "{group_card}"
+				image = "{preview_image_1:small}"
+
+				cat_1 = "{cat_card_collection}"
+				cat_1_all = "{cat_card_collection_all}"
+				cat_2 = "{cat_card_size}"
+				cat_2_all = "{cat_card_size_all}"
+				cat_3 = "{cat_card_type}"
+				cat_3_all = "{cat_card_type_all}"
+				cat_4 = "{cat_orientation}"
+				cat_4_all = "{cat_orientation_all}"
+
+			}
+		{/categories}
+
+		<!-- STATIONARY -->
+		{categories show="{cat_stationery}"}
+			{embed="detail/related_item"
+
+				entry_id = "{entry_id}"
+				product = "stationery"
+				category_id = "{category_id}"
+				group = "{group_stationery}"
+				image = "{preview_image_1:small}"
+
+				cat_1 = "{cat_stationery_collection}"
+				cat_1_all = "{cat_stationery_collection_all}"
+				cat_2 = "{cat_stationery_size}"
+				cat_2_all = "{cat_stationery_size_all}"
+				cat_3 = "{cat_stationery_type}"
+				cat_3_all = "{cat_stationery_type_all}"
+				cat_4 = "{cat_orientation}"
+				cat_4_all = "{cat_orientation_all}"
+
+			}
+		{/categories}
+
+		<!-- CANVAS -->
+		{categories show="{cat_canvas}"}
+			{embed="detail/related_item"
+
+				entry_id = "{entry_id}"
+				product = "canvas"
+				category_id = "{category_id}"
+				group = "{group_canvas}"
+				image = "{preview_image_1:small}"
+
+				cat_1 = "{cat_canvas_collection}"
+				cat_1_all = "{cat_canvas_collection_all}"
+				cat_2 = "{cat_canvas_size}"
+				cat_2_all = "{cat_canvas_size_all}"
+				cat_3 = "{cat_canvas_type}"
+				cat_3_all = "{cat_canvas_type_all}"
+				cat_4 = "{cat_orientation}"
+				cat_4_all = "{cat_orientation_all}"
+
+			}
+		{/categories}
+
+		<!-- METAL -->
+		{categories show="{cat_metal}"}
+			{embed="detail/related_item"
+
+				entry_id = "{entry_id}"
+				product = "metal"
+				category_id = "{category_id}"
+				group = "{group_metal}"
+				image = "{preview_image_1:small}"
+
+				cat_1 = "{cat_metal_collection}"
+				cat_1_all = "{cat_metal_collection_all}"
+				cat_2 = "{cat_metal_size}"
+				cat_2_all = "{cat_metal_size_all}"
+				cat_3 = "{cat_metal_type}"
+				cat_3_all = "{cat_metal_type_all}"
+				cat_4 = "{cat_orientation}"
+				cat_4_all = "{cat_orientation_all}"
+
+			}
+		{/categories}
+
+		<!-- FRAME -->
+		{categories show="{cat_frame}"}
+			{embed="detail/related_item"
+
+				entry_id = "{entry_id}"
+				product = "framed"
+				category_id = "{category_id}"
+				group = "{group_frame}"
+				image = "{preview_image_1:small}"
+
+				cat_1 = "{cat_frame_collection}"
+				cat_1_all = "{cat_frame_collection_all}"
+				cat_2 = "{cat_frame_size}"
+				cat_2_all = "{cat_frame_size_all}"
+				cat_3 = "{cat_frame_type}"
+				cat_3_all = "{cat_frame_type_all}"
+				cat_4 = "{cat_orientation}"
+				cat_4_all = "{cat_orientation_all}"
+
+			}
+		{/categories}
+
+		<!-- GALLERY -->
+		{categories show="{cat_gallery}"}
+			{embed="detail/related_item"
+
+				entry_id = "{entry_id}"
+				product = "gallery"
+				category_id = "{category_id}"
+				group = "{group_gallery}"
+				image = "{preview_image_1:small}"
+
+				cat_1 = "{cat_gallery_collection}"
+				cat_1_all = "{cat_gallery_collection_all}"
+				cat_2 = "{cat_gallery_size}"
+				cat_2_all = "{cat_gallery_size_all}"
+				cat_3 = "{cat_gallery_type}"
+				cat_3_all = "{cat_gallery_type_all}"
+				cat_4 = "{cat_orientation}"
+				cat_4_all = "{cat_orientation_all}"
+
+			}
+		{/categories}
+
+		<!-- BOOK -->
+		{categories show_group="{cat_book}" limit="1"}
+			{embed="detail/related_item"
+
+				entry_id = "{entry_id}"
+				product = "books"
+				category_id = "{category_id}"
+				group = "{group_book}"
+				image = "{preview_image_1:small}"
+
+				cat_1 = "{cat_book_collection}"
+				cat_1_all = "{cat_book_collection_all}"
+				cat_2 = "{cat_book_size}"
+				cat_2_all = "{cat_book_size_all}"
+				cat_3 = "{cat_book_type}"
+				cat_3_all = "{cat_book_type_all}"
+				cat_4 = "{cat_orientation}"
+				cat_4_all = "{cat_orientation_all}"
+
+			}
+		{/categories}
+
+		<!-- GIFT -->
+		{categories show_group="{cat_gift}" limit="1"}
+			{embed="detail/related_item"
+
+				entry_id = "{entry_id}"
+				product = "gifts"
+				category_id = "{category_id}"
+				group = "{group_gift}"
+				image = "{preview_image_1:small}"
+
+				cat_1 = "{cat_gift_collection}"
+				cat_1_all = "{cat_gift_collection_all}"
+				cat_2 = ""
+				cat_2_all = ""
+				cat_3 = "{cat_gift_type}"
+				cat_3_all = "{cat_gift_type_all}"
+				cat_4 = "{cat_orientation}"
+				cat_4_all = "{cat_orientation_all}"
+
+			}
+		{/categories}
+
+		<!-- CLASS -->
+		{categories show_group="{cat_class}" limit="1"}
+			{embed="detail/related_item"
+
+				entry_id = "{entry_id}"
+				product = "classes"
+				category_id = "{category_id}"
+				group = "{group_class}"
+				image = "{preview_image_1:small}"
+
+				cat_1 = "{cat_class_size}"
+				cat_1_all = "{cat_class_size_all}"
+				cat_2 = "{cat_class_category}"
+				cat_2_all = "{cat_class_category_all}"
+				cat_3 = "{cat_class_level}"
+				cat_3_all = "{cat_class_level_all}"
+				cat_4 = "{cat_class_equipment}"
+				cat_4_all = "{cat_class_equipment_all}"
+
+			}
+		{/categories}
+
+		<!-- MISC -->
+		{categories show_group="{cat_miscellaneous}" limit="1"}
+			{embed="detail/related_item"
+
+				entry_id = "{entry_id}"
+				product = "misc"
+				category_id = "{category_id}"
+				group = "0/0/0/0"
+				image = "{preview_image_1:small}"
+
+				cat_1 = ""
+				cat_1_all = ""
+				cat_2 = "{cat_miscellaneous}"
+				cat_2_all = "0"
+				cat_3 = ""
+				cat_3_all = ""
+				cat_4 = ""
+				cat_4_all = ""
+
+			}
+		{/categories}
+
+	{/exp:channel:entries}
+
+</div>
+
+<div class="cart-suggest container">
+	<div align="center">
+		<div class="majorButton" onclick="javascript: suggest.hide();">Continue to Checkout</div>
+	</div>
+</div>
+
+<script type="text/javascript" language="javascript">
+
+	suggest.loaded();
+
+</script>

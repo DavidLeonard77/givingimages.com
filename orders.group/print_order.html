@@ -1,0 +1,221 @@
+<!doctype html>
+<html>
+<head>
+
+	<!-- Scripts -->
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="{path=global/script}" type="text/javascript" charset="utf-8"></script>
+	<script src="{path=orders/script}" type="text/javascript" charset="utf-8"></script>
+
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900">
+
+	<style type="text/css">
+
+		.strong {
+			font-weight: 700;
+		}
+		.color-green {
+			color: #9ebd3d;
+		}
+		.color-turquoise {
+			color: #4889A2;
+		}
+
+		.ticket {
+			font-family: 'Source Sans Pro', sans-serif;
+			font-size: 14px;
+			width: auto;
+			padding: 20px;
+			font-weight: 400;
+		}
+		.ticket > span {
+			font-size: 18px;
+		}
+		.ticket > div:first-child {
+			text-align: right;
+			font-size: 22px;
+			padding-bottom: 40px;
+		}
+
+		.itemDivider {
+			width: 100%;
+			border: 0px;
+			border-top: 1px;
+			border-style: dashed;
+			border-color: #ccc;
+			margin-top: 8px;
+			padding-bottom: 8px;
+		}
+
+		.customerInfo {
+			display: table;
+			width: 100%;
+		}
+		.customerInfo > div:first-child {
+			float: left;
+			font-size: 28px;
+		}
+		.customerInfo > div:last-child {
+			float: right;
+			text-align: right;
+		}
+
+		.customerShipping {
+			display: table;
+			width: 100%;
+		}
+		.customerShipping > div:first-child {
+			float: left;
+		}
+		.customerShipping > div:last-child {
+			float: right;
+			text-align: right;
+		}
+		.customerShipping span.color-green,
+		.customerShipping span.color-turquoise {
+			font-size: 24px;
+		}
+
+		.orderTotal {
+			display: table;
+			width: 100%;
+		}
+		.orderTotal > div:first-child,
+		.orderTotal > div:last-child {
+			float: right;
+			text-align: right;
+			padding-top: 7px;
+		}
+		.orderTotal > div:last-child {
+			padding: 7px 8px 8px 4px;
+		}
+
+		.ticketItem {
+			display: table;
+			width: 100%;
+		}
+		.ticketItem > div:first-child {
+			float: left;
+			text-align: left;
+		}
+		.ticketItem > div:last-child {
+			float: right;
+			text-align: right;
+		}
+		.ticketItem span:first-child {
+			font-size: 18px;
+		}
+
+		.logo {
+			background-position: center;
+			background-size: contain;
+			background-repeat: no-repeat;
+			background-image: url('/graphics/graphics/logo_big.png');
+			float: left;
+			width: 160px;
+			height: 40px;
+		}
+
+		@media print {
+			.ticket {
+				page-break-after: always;
+			}
+		}
+
+	</style>
+
+</head>
+
+<!-- BODY -->
+<body>
+
+{if logged_in}
+
+	{if group_id == "1" || group_id == "6" || group_id == "7" || group_id == "8"}
+
+		{exp:channel:entries
+
+			channel = "order"
+			entry_id = "{segment_3}"
+			dynamic = "off"
+			status = "{order_status_all}"
+
+		}
+
+			<script type="text/javascript">
+
+				orders.order['{entry_id}'] = {
+
+					entry: '{entry_id}',
+					status: '{status}',
+					department: {},
+					pageCount: 1,
+					loadCount: 0,
+					item: {},
+					totals: {
+
+						subtotal: toolbox.floatPrice('{order_subtotal}'),
+						shipping: toolbox.floatPrice('{order_shipping_cost}'),
+						tax: toolbox.floatPrice('{order_tax}'),
+						total: toolbox.floatPrice('{order_total}'),
+						coupon: '{order_coupon}',
+						payment: '{order_payment_status}'
+
+					}
+
+				};
+
+			</script>
+
+			{categories}
+
+				<script type="text/javascript">
+
+					// Active department
+					orders.order['{entry_id}'].department['{category_id}'] = { categoryId: '{category_id}' };
+
+				</script>
+
+			{/categories}
+
+			{exp:cartthrob:order_items order_id="{entry_id}"}
+
+				<script type="text/javascript">
+
+					orders.order['{entry_id}'].item['{item:count}'] = {
+
+						entry: '{item:entry_id}',
+						id: '{item:purchased_order_id}',
+						department: '{item:purchased_department}',
+						attributes: '{item:purchased_attributes}',
+						subtotal: toolbox.floatPrice('{item:subtotal}'),
+						pdf: []
+
+					}
+
+				</script>
+
+			{/exp:cartthrob:order_items}
+
+			<div id="tickets"></div>
+
+			<script type="text/javascript">
+
+				// Sync Ajax get PDFs
+				orders.getPDFs('{entry_id}',function(orderId){
+
+					// Create pages
+					orders.createTickets(orderId);
+
+				});
+
+			</script>
+
+		{/exp:channel:entries}
+
+	{/if}
+
+{/if}
+
+</body>
+</html>

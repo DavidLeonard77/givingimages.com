@@ -1,0 +1,67 @@
+<div id="pinnedFooter" class="visibilityLarge pinnedFooter pinnedFooterClosed" align="center">
+
+	<!-- Background -->
+	<div></div>
+
+	<!-- Lightbox container -->
+	<div class="pinnedFooterSpacer pinnedFooterTxt">
+
+		<!-- Lightbox headers -->
+		<div align="center">
+			<div class="pinnedFooterHeader pinnedFooterTxtLink" id="title_recents" onclick="javascript: lightbox.showLightbox('favorites','recents');">
+				<div id="count_recents"></div>
+				<div><div class="pinnedFooter-bg-icon-zoom"></div>RECENTLY VIEWED ITEMS</div>
+			</div>
+
+			{if logged_in}
+				<div class="pinnedFooterHeader pinnedFooterTxtLink"
+					 id="title_favorites"
+					 onclick="javascript: lightbox.showLightbox('recents','favorites');">
+					<div id="count_favorites"></div>
+					<div><div class="pinnedFooter-bg-icon-favorite"></div>YOUR FAVORITE ITEMS</div>
+				</div>
+			{if:else}
+				<div class="pinnedFooterHeader pinnedFooterTxtLink"
+					 id="title_favorites"></div>
+			{/if}
+
+		</div>
+
+		<!-- Lightboxes -->
+		<div class="pinnedSpacer" align="center">
+			<div id="pinnedFooter_recents"></div>
+			<div id="pinnedFooter_favorites"></div>
+		</div>
+
+		<!-- Close button -->
+		<div class="pinnedFooterCloseSpacer">
+			<div class="overlayClose" onclick="javascript: lightbox.hideLightbox();">x</div>
+		</div>
+
+	</div>
+
+</div>
+
+<!-- //// IF NOT LOGGED - Load Recently Viewed //// -->
+<script type="text/javascript" language="javascript">
+
+	lightbox.recentItems = '{exp:remember_me:get reverse="yes"}';
+	lightbox.loadLightbox(lightbox.recentItems,'recents','recently%20viewed%20items');
+
+</script>
+
+<!-- //// IF LOGGED IN - Load saved favorites//// -->
+{if logged_in}
+	<script type="text/javascript" language="javascript">
+
+		lightbox.favoriteItems = '{exp:remember_me:load list="favorites" reverse="yes"}';
+		lightbox.loadLightbox(lightbox.favoriteItems,'favorites','favorite%20items');
+
+	</script>
+{/if}
+
+<!-- //// Hide the Lightboxes -->
+<script type="text/javascript" language="javascript">
+	toolbox.classReplacer('pinnedFooter_recents','pinnedSpacer inactive transparent');
+	toolbox.classReplacer('pinnedFooter_favorites','pinnedSpacer inactive transparent');
+</script>

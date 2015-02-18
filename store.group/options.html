@@ -1,0 +1,38 @@
+{exp:profile:view}
+
+	{if member_pickup_location != "Deliver to my shipping address"}
+
+		{if group_id == "1" || group_id == "6" || group_id == "7" || group_id == "8" || "{exp:cartthrob:cart_total}" == "$0.0000000"}
+
+			<!-- Select Payment Gateway if Pickup -->
+			<div class="cart-group" align="right">
+				<div class="header strong">Select Payment Option</div>
+				<div class="itemDivider"></div>
+
+				<select class="inputFieldBig select" id="gatewaySelect" onchange="javascript: member.setGateway(this);">
+
+					<option value="authorize_net"{if segment_3 != 'ct_save_order'} selected="selected"{/if}>Pay Online</option>
+					<option value="ct_save_order"{if segment_3 == 'ct_save_order'} selected="selected"{/if}>Pay at Pickup</option>
+
+				</select>
+			</div>
+
+		{/if}
+
+	{/if}
+
+	<!-- Order Notes -->
+	<div class="cart-group" align="right">
+		<div class="header strong">Order Notes</div>
+		<div class="itemDivider"></div>
+
+		<div class="cart-fieldGroup" align="right">
+			<textarea id="order_notes_checkout" name="order_notes" class="cart-customTextarea" placeholder=""></textarea>
+		</div>
+	</div>
+
+	{if segment_3 && "{segment_3}" != "ct_save_order"}
+		<input type="hidden" name="order_coupon" value="{segment_3}">
+	{/if}
+
+{/exp:profile:view}

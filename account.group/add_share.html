@@ -1,0 +1,33 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
+<head>
+	{embed="global/stage" title=""}
+</head>
+
+<!-- BODY -->
+<body>
+
+	{if logged_in}
+
+		<script type="text/javascript"> toolbox.docLoc('{pixfizz_url}/site/copy?preview={segment_3}&target=%2Fsite%2Fcopy'); </script>
+
+	<!-- Get them to log-in -->
+	{if:else}
+
+		{embed="global/login"
+
+			forced = "true"
+			abort = "{site_url}"
+			alert = "undefined"
+			return = "{segment_1}/{segment_2}/{segment_3}"\
+
+		}
+
+	{/if}
+
+</body>
+</html>

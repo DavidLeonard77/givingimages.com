@@ -1,0 +1,71 @@
+<div class="drillDownSpacer visibilityLarge">
+
+	<div id="drillDownContainer">
+		<div id="drillDownDock">
+			<div id="drillDown"></div>
+			<div class="optionItemButton navMenuTxt" onclick="javascsript: toolbox.docLoc('/index.php/{segment_1}/{segment_2}/{cat_print_collection_all}/{cat_print_size_all}/{cat_print_type_all}/{cat_orientation_all}');">Clear All Filters</div>
+		</div>
+	</div>
+	<div id="drillDownFloatContainer" class="opaque active">
+		<div id="drillDownFloat"></div>
+	</div>
+
+	<div id="remove">
+
+		<!-- Type -->
+		{embed="products/drill"
+
+			segment = "{segment_2}"
+			title = "Print Type"
+			group = "{cat_print}"
+			channel = "{embed:channel}"
+			cat_left = ""  cat_right = "&{segment_3}&{segment_4}&{segment_5}&{segment_6}"
+			url_left = ""  url_right = "/{segment_3}/{segment_4}/{segment_5}/{segment_6}"
+
+		}
+
+		<!-- Collection -->
+		{embed="products/drill"
+
+			segment = "{segment_3}"
+			title = "Collection"
+			group = "{cat_print_collection}"
+			channel = "{embed:channel}"
+			cat_left = "{segment_2}&"  cat_right = "&{segment_4}&{segment_5}&{segment_6}"
+			url_left = "{segment_2}/"  url_right = "/{segment_4}/{segment_5}/{segment_6}"
+
+		}
+
+		<!-- Orientation -->
+		{embed="products/drill"
+
+			segment = "{segment_6}"
+			title = "Print Orientation"
+			group = "{cat_orientation}"
+			channel = "{embed:channel}"
+			cat_left = "{segment_2}&{segment_3}&{segment_4}&{segment_5}&"  cat_right = ""
+			url_left = "{segment_2}/{segment_3}/{segment_4}/{segment_5}/"  url_right = ""
+
+		}
+
+		<!-- Size -->
+		{embed="products/drill"
+
+			segment = "{segment_4}"
+			title = "Print Size"
+			group = "{cat_print_size}"
+			channel = "{embed:channel}"
+			cat_left = "{segment_2}&{segment_3}&"  cat_right = "&{segment_5}&{segment_6}"
+			url_left = "{segment_2}/{segment_3}/"  url_right = "/{segment_5}/{segment_6}"
+
+		}
+
+	</div>
+
+</div>
+
+<script type="text/javascript">
+
+	drilldown.createFilter();
+
+</script>

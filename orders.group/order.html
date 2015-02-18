@@ -1,0 +1,129 @@
+{if logged_in}
+
+	{if group_id == "1" || group_id == "6" || group_id == "7" || group_id == "8"}
+
+		{exp:channel:entries
+
+			channel = "order"
+			dynamic = "off"
+			status = "{segment_3}"
+			category = "{segment_4}"
+			entry_id = "{segment_5}"
+
+		}
+
+			<!-- Skip container if refreshing an individual order row -->
+			{if segment_5 == ''}<div id="orderRow_{entry_id}" class="orderRow-order">{/if}
+
+				<!-- Order Header -->
+				<div class="rowCell-header orderHeader-order" align="left">
+
+					<div>
+
+						<div class="orderIcn-order">
+							<a href="{site_url}index.php/orders/print_order/{entry_id}" target="{entry_id}">
+								<img src="{site_url}graphics/graphics/order_print_w.png" width="23" height="20">
+							</a>
+						</div>
+
+						<div class="orderRowDetails">
+							<a onclick="javascript: orders.viewOrder('{entry_id}','{segment_4}');">
+								<span class="strong">{entry_id}</span>
+
+								{exp:cartthrob:order_items order_id="{entry_id}"}
+									{if item:count == 1}{item:total_results} item(s){/if}
+								{/exp:cartthrob:order_items}
+
+								&nbsp;&nbsp;~&nbsp;&nbsp;{entry_date format="%M %d at %g:%i%a"}
+							</a>
+						</div>
+
+						<div class="orderRowName strong">{order_billing_last_name}, {order_billing_first_name}</div>
+
+					</div>
+
+				</div>
+
+				<!-- Order Delivery Location -->
+				<div class="rowCell-delivery" align="left">
+
+					<div>
+						{if "{order_pickup_location}" == "Deliver to my shipping address"}
+							<span class="strong color-tturquoise">Ship</span>&nbsp;&nbsp;{order_full_shipping_address}
+						{if:else}
+							<span class="strong color-green">Pickup</span>&nbsp;&nbsp;{order_pickup_location}
+						{/if}
+					</div>
+
+				</div>
+
+				<!-- Order Payment Status -->
+				<div class="rowCell-payment" align="center">
+
+					<span class="strong {if order_payment_status == 'Paid'}color-green
+							 {if:elseif order_payment_status == 'Not Paid'}color-turquoise{/if}">{order_payment_status}</span>	
+
+				</div>
+
+				<!-- Order Footer -->
+				<div class="rowCell-order {if status == 'New Order'}bgcolor-green
+							   {if:elseif status == 'In Production'}bgcolor-navy
+							{if:elseif status == 'Ready for Pickup'}bgcolor-teal
+								  {if:elseif status == 'In Transit'}bgcolor-turquoise
+									 {if:elseif status == 'Shipped'}bgcolor-darkNavy
+														   {if:else}bgcolor-darkGrey{/if}"
+
+					 onclick="javascript: orders.viewOrder('{entry_id}','{segment_4}');"
+					 align="center">{status}
+				</div>
+
+			<!-- Skip container if refreshing an individual order row -->
+			{if segment_5 == ''}</div>{/if}
+
+			{if no_results}
+				{if segment_2 != ""}
+					<div class="noOrdersSpacer strong" align="center">no orders were found</div>
+				{/if}
+			{/if}
+
+		{/exp:channel:entries}
+
+		{if segment_5 == ''}
+			<script type="text/javascript">
+
+				$('#processOrders').load('{site_url}index.php/orders/process');
+
+			</script>
+		{/if}
+
+	{if:else}
+
+		<script type="text/javascript">
+
+			keychain.showLogin({
+
+				return_url: '{segment_1}',
+				abort_url: '{site_url}',
+				forced: 'true'
+
+			});
+
+		</script>
+
+	{/if}
+
+{if:else}
+
+	<script type="text/javascript">
+
+		keychain.showLogin({
+
+			return_url: '{segment_1}',
+			abort_url: '{site_url}',
+			forced: 'true'
+
+		});
+
+	</script>
+
+{/if}

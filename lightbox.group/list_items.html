@@ -1,0 +1,36 @@
+{exp:channel:entries
+
+	dynamic = "no"
+	entry_id = "{embed:list}"
+	fixed_order = "{embed:list}"
+	limit = "{embed:limit}"
+	status = "{status_product}"
+	disable = "pagination|category_fields|member_data"
+
+}
+
+	{if count == "1"}<script type="text/javascript" language="javascript">													lightbox.totalResults = {total_results}; </script>{/if}
+
+	{categories show_group="{cat_print}|{cat_card}|{cat_decor}|{cat_book}|{cat_gift}|{cat_class}|{cat_miscellaneous}"}<script type="text/javascript" language="javascript"> lightbox.categoryId = {category_id}; </script>{/categories}
+	
+	{categories show_group="{cat_print}"}<script type="text/javascript" language="javascript">								lightbox.category = 'prints'; </script>{/categories}
+	{categories show_group="{cat_card}" show="not {cat_stationery}"}<script type="text/javascript" language="javascript">	lightbox.category = 'cards'; </script>{/categories}
+	{categories show="{cat_stationery}"}<script type="text/javascript" language="javascript">								lightbox.category = 'stationery'; </script>{/categories}
+	{categories show="{cat_canvas}"}<script type="text/javascript" language="javascript">									lightbox.category = 'canvas'; </script>{/categories}
+	{categories show="{cat_metal}"}<script type="text/javascript" language="javascript">									lightbox.category = 'metal'; </script>{/categories}
+	{categories show="{cat_frame}"}<script type="text/javascript" language="javascript">									lightbox.category = 'framed'; </script>{/categories}
+	{categories show="{cat_gallery}"}<script type="text/javascript" language="javascript">									lightbox.category = 'gallery'; </script>{/categories}
+	{categories show_group="{cat_book}"}<script type="text/javascript" language="javascript">								lightbox.category = 'books'; </script>{/categories}
+	{categories show_group="{cat_gift}"}<script type="text/javascript" language="javascript">								lightbox.category = 'gifts'; </script>{/categories}
+	{categories show_group="{cat_class}"}<script type="text/javascript" language="javascript">								lightbox.category = 'classes'; </script>{/categories}
+	{categories show_group="{cat_miscellaneous}"}<script type="text/javascript" language="javascript">						lightbox.category = 'misc'; </script>{/categories}
+
+	<div id="{segment_3}_{entry_id}" class="pinnedFooterThumbSpacer" align="center"></div>
+
+	<script type="text/javascript" language="javascript">
+
+		$('#{segment_3}_{entry_id}').load('{site_url}index.php/lightbox/lightbox_item/' + lightbox.category + '/' + lightbox.categoryId + '/{entry_id}/{segment_3}');
+
+	</script>
+
+{/exp:channel:entries}

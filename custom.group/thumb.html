@@ -1,0 +1,70 @@
+{exp:channel:entries
+
+	dynamic = "no"
+	entry_id = "{embed:entry_id}"
+	limit = "1"
+	status = "{status_product}"
+	disable = "pagination|category_fields|member_data"
+
+}
+
+	<div class="thumb" onclick="javascript: toolbox.docLoc('{site_url}index.php/detail/{embed:product}/{embed:category_id}/{embed:group}/{embed:entry_id}');">
+
+		<div class="thumb-bg-preview" style="background-image: url('{preview_image_1:small}');"></div>
+		<div class="thumbTxt">
+
+			<div>
+				{categories limit="1" show_group="{embed:cat_2}" show="not {embed:cat_2_all}"}{category_name}{/categories}
+				{categories limit="1" show_group="{embed:cat_3}" show="not {embed:cat_3_all}"}{category_name}{/categories}
+			</div>
+
+			<div>{product_short_desc}</div>
+			<div>{categories limit="1" show_group="{embed:cat_1}" show="not {embed:cat_1_all}"}{category_name}{/categories}</div>
+
+			<!-- PRICE -->
+			<div id="product_price_{entry_id}"></div>
+
+		</div>
+
+	</div>
+
+	<div class="thumbFlare">
+
+		<!-- STATUS FLAGS -->
+		<div class="thumbFlagSpacer" id="product_flag_{entry_id}">
+
+			{if status == "New"}
+				<div class="thumb-bg-flag-new"></div>
+			{if:elseif status == "Designer"}
+				<div class="thumb-bg-flag-designer"></div>
+			{if:elseif status == "Favorite"}
+				<div class="thumb-bg-flag-favorite"></div>
+			{if:elseif status == "Sale"}
+				<div class="thumb-bg-flag-sale"></div>
+			{/if}
+
+		</div>
+
+		<div class="thumbIconSpacer">
+
+			<div class="visibilityLarge thumb-bg-icon-zoom" onclick="javascript: zoom.show('{embed:product}/{embed:category_id}/{embed:group}/{embed:entry_id}');"></div>
+			<div class="visibilityLarge thumb-bg-icon-favorite"
+
+				{if logged_in} onclick="javascript: lightbox.addItems('{entry_id}','favorites');"
+				{if:else} onclick="javascript: keychain.showLogin({
+
+					return_url: '{segment_2}/{segment_3}/{segment_4}/{segment_5}/{segment_6}/{segment_7}'
+
+				});"{/if}></div>
+
+		</div>
+
+	</div>
+
+	<script type="text/javascript">
+
+		cart.updatePriceDetails('{entry_id}');
+
+	</script>
+
+{/exp:channel:entries}

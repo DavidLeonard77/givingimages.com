@@ -1,0 +1,58 @@
+<div class="detailOrderSpacer">
+
+	<div id="detailHeader"><div class="orderRow-loading" align="center"><img src="{site_url}graphics/graphics/loading.gif" width="32" height="32"></div></div>
+	<div id="detailItems"></div>
+
+	{if logged_in}
+
+		{if group_id == "1" || group_id == "6" || group_id == "7" || group_id == "8"}
+
+			{exp:profile:view}
+
+				<script type="text/javascript">
+
+					keychain.userId = '{pixfizz_user_id}';
+					keychain.checkPixfizzLogin(keychain.userId,'{segment_1}',function(){
+
+						// Get Header
+						$('#detailHeader').load('{site_url}index.php/orders/detail_header/{segment_3}/{segment_4}');
+						
+					});
+
+				</script>
+
+			{/exp:profile:view}
+
+		{if:else}
+
+			<script type="text/javascript">
+
+				keychain.showLogin({
+
+					return_url: '{segment_1}',
+					abort_url: '{site_url}',
+					forced: 'true'
+
+				});
+
+			</script>
+
+		{/if}
+
+	{if:else}
+
+		<script type="text/javascript">
+
+			keychain.showLogin({
+
+				return_url: '{segment_1}',
+				abort_url: '{site_url}',
+				forced: 'true'
+
+			});
+
+		</script>
+
+	{/if}
+
+</div>

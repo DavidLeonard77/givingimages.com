@@ -1,0 +1,141 @@
+<!doctype html>
+
+{if segment_3 != "complete"}
+
+	<head>
+		{embed="global/stage_ssl" title="&nbsp;order info"}
+
+		<script type="text/javascript">
+
+			toolbox.docLoc('{site_url}index.php/{segment_1}/{segment_2}/complete');
+
+		</script>
+
+	</head>
+
+{if:else}
+
+	<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
+	<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
+	<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
+	<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
+	<!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
+	<head>
+		{embed="global/stage" title="&nbsp;order info"}
+
+	</head>
+
+	<!-- BODY -->
+	<body>
+
+		<div align="center">
+
+			<!-- LOGIN -->
+			{embed="global/login"}
+
+			<!-- HEADER -->
+			{embed="global/header"}
+
+			<div class="canvas">
+				
+					{exp:cartthrob:submitted_order_info}
+
+						{if authorized}
+
+							{embed="global/title" title="Your transaction is complete!"}
+
+							<div class="resultsTxt container" align="center">
+
+								<span class="strong">Thank you!</span><br>
+								<br>
+								We will notify you via email on the status of your order. <br>
+								<br>
+
+								Order ID: <span class="strong">{order_id}</span><br>
+								Your total: $<span id="cart_total"></span>
+
+							</div>
+
+							<div class="cart-continue">
+								<div class="optionItemBox optionItemButton" onclick="javascript: toolbox.docLoc('/index.php');">Continue Shopping</div>
+							</div>
+
+							<script type="text/javascript">
+
+								$('#cart_total').html($.number(toolbox.floatPrice('{cart_total}'),2));
+
+							</script>
+
+							<iframe src="/index.php/account/disable_project/{order_id}" width="0" height="0" margin-width="0" margin-height="0" frameborder="0" scrolling="no" seamless></iframe>
+
+
+						{if:elseif processing}
+
+							{embed="global/title" title="Your order is complete!"}
+
+							<div class="resultsTxt container" align="center">
+
+								<span class="strong">Thank you!</span><br>
+								<br>
+								We will notify you via email on the status of your order.<br>
+								<br>
+								Order ID: <span class="strong">{order_id}</span><br>
+								Your Total: $<span id="cart_total"></span>
+
+							</div>
+
+							<div class="cart-continue">
+								<div class="optionItemBox optionItemButton" onclick="javascript: toolbox.docLoc('/index.php');">Continue Shopping</div>
+							</div>
+
+							<script type="text/javascript">
+
+								$('#cart_total').html($.number(toolbox.floatPrice('{cart_total}'),2));
+
+							</script>
+
+							<iframe src="/index.php/account/disable_project/{order_id}" width="0" height="0" margin-width="0" margin-height="0" frameborder="0" scrolling="no" seamless></iframe>
+
+
+						{if:elseif declined}
+
+							{embed="global/title" title="Payment was declined"}
+
+							<div class="resultsTxt container">
+
+								<span class="strong">{error_message}</span>
+							
+							</div>
+
+							<div class="cart-continue">
+								<div class="optionItemBox optionItemButton" onclick="javascript: toolbox.docLoc('/index.php/store/checkout');">Try checking out again</div>
+							</div>
+
+						{if:elseif failed}
+
+							{embed="global/title" title="Payment failed"}
+
+							<div class="resultsTxt container">
+
+								<span class="strong">{error_message}</span>
+
+							</div>
+
+							<div class="cart-continue">
+								<div class="optionItemBox optionItemButton" onclick="javascript: toolbox.docLoc('/index.php/store/checkout');">Try checking out again</div>
+							</div>
+						{/if}
+
+					{/exp:cartthrob:submitted_order_info}
+
+			</div>
+
+			<!-- FOOTER -->
+			{embed="global/footer"}
+			
+		</div>
+
+	</body>
+	</html>
+
+{/if}

@@ -1,0 +1,30 @@
+<!--TOP MENU-->
+<div class="menuControl" onclick="javascript: mainmenu.checkVisibility();"></div>
+<div id="menuBoxSpacer" align="center"></div>
+
+<div id="remove">
+
+	{exp:channel:categories channel="sections" show="not {section_custom}|{section_footer_menu}" style="linear"}
+
+		<script type="text/javascript">
+
+			mainmenu.section['section_{category_description}'] = { 
+
+				id: parseInt('{category_description}'),
+				title: '{category_name}',
+				item: {}
+			}
+
+		</script>
+
+		{embed="global/menu_item" cat="{category_description}"}
+
+	{/exp:channel:categories}
+
+</div>
+
+<script type="text/javascript">
+
+	mainmenu.createTopMenu();
+
+</script>

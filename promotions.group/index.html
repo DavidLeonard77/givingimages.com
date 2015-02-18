@@ -1,0 +1,76 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
+<head>
+	{exp:channel:entries channel="store_promotion" url_title="{segment_2}" dynamic="off"}
+		{embed="global/stage" title="&nbsp;{title}"}
+	{/exp:channel:entries}
+</head>
+
+<!-- BODY -->
+<body>
+
+	{if logged_in}
+
+		{exp:profile:view}
+
+			<script type="text/javascript">
+
+				keychain.userId = '{pixfizz_user_id}';
+				keychain.checkPixfizzLogin(keychain.userId,'{segment_1}/{segment_2}',function(){});
+				
+			</script>
+
+		{/exp:profile:view}
+
+	{if:else}
+
+		<iframe id="pixfizzLogout" src="{pixfizz_url}/site/logout_check" width="0" height="0" marginheight="0" marginwidth="0" frameborder="0" seemless></iframe>
+
+	{/if}
+
+	<div align="center">
+
+		<!-- LOGIN -->
+		{embed="global/login"}
+
+		<!-- HEADER -->
+		{embed="global/header"}
+
+		<div class="canvas">
+
+			{exp:channel:entries channel="store_promotion" url_title="{segment_2}" dynamic="off" limit="1"}
+				{embed="global/title" title="{title}"}
+			{/exp:channel:entries}
+
+			<div class="container">
+				{embed="store/nav" path="default" title="Continue Shopping"}
+				{embed="global/nav" category="{section_06}" path="categories/6"}
+				{embed="global/nav" category="{cat_promotion_store}" path="subcategories/{cat_promotion_store}"}
+			</div>
+
+			<!-- CONTENT -->
+			{exp:channel:entries channel="store_promotion" url_title="{segment_2}" dynamic="off"}
+			
+				<div class="landingBody container">
+					<img class="container" src="{store_promotion_image:detail}">
+
+					{if store_promotion_description != ''}
+						{store_promotion_description}
+					{/if}
+				</div>
+			
+			{/exp:channel:entries}
+
+		</div>
+		
+		<!-- FOOTER -->
+		{embed="global/footer"}
+		
+	</div>
+
+</body>
+</html>

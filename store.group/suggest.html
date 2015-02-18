@@ -1,0 +1,40 @@
+<div id="suggestRelatedDimmer" class="overlayDimmer overlayAni transparent inactive" onclick="javascript: suggest.hide();"></div>
+
+<div id="suggestRelated" class="overlayContainer-suggest overlayAni transparent inactive">
+
+	<div>
+
+		<div id="suggested"></div>
+
+	</div>
+
+</div>
+
+{exp:channel:entries
+
+	entry_id = "{segment_2}"
+	dynamic = "off"
+	limit = "1"
+	status = "{status_product}"
+	disable = "pagination|member_data"
+
+}
+
+	<!-- RELATED PRODUCTS -->
+	{categories}
+
+		{embed="store/related_category"
+
+			category = "{category_id}"
+
+		}
+
+	{/categories}
+
+	<script type="text/javascript">
+
+		suggest.show('{segment_2}');
+
+	</script>
+
+{/exp:channel:entries}
